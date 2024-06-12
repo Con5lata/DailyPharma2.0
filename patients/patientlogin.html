@@ -1,13 +1,15 @@
--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../style.css">
-    <title>Login Page</title>
+    <link rel="stylesheet" href="../style2.css">
+
+    <title>Patient Login</title>
 </head>
+
 <body class="Login">
 
     <!--Header-->
@@ -16,13 +18,13 @@
             <a href="index.html">DailyPharma</a>
         </div>
 
-        <nav class= navbar id="navbar">
+        <nav class="navbar" id="navbar">
             <a href="index.html">Home</a>
-            <a href="index.html#service">About Us</a>
-            <a href="index.html#feature">Features</a>
+            <a href="index.html#services">About Us</a>
+            <a href="index.html#features">Features</a>
             <a href="index.html#testimonials">Testimonials</a>
             <a href="index.html#footer">Contact Us</a>
-            <a href="login.html" class="btn-login-popup" >Login</a>
+            <a href="register.html" class="btn-login-popup">Register</a>
         </nav>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
@@ -30,47 +32,42 @@
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
                 <a href="index.html">Home</a>
-                <a href="index.html#service">About Us</a>
-                <a href="index.html#feature">Features</a>
+                <a href="index.html#services">About Us</a>
+                <a href="index.html#features">Features</a>
                 <a href="index.html#testimonials">Testimonials</a>
                 <a href="index.html#footer">Contact Us</a>
-                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
             </div>
         </div>
     </header>
 
-
-    <!--Dynamic Login Form-->
+    <!--Patient Login Form-->
     <div class="wrapper">
-
         <div class="title-text">
-            <h1>Login</h1>
+            <h1 class="heading">Patient Login</h1>
         </div>
-       
-        <div class="#">
-            
-            <form action="patients/loginPatient.php" class="login_patient" method="post">
+
+        <div class="form">
+            <form action="patients/loginPatient.php" class="login_patient form" method="post">
                 <div class="input-box">
-                    <label >Patient SSN</label>
-                    <input type="text" name="Patient_SSN">
+                    <label>Patient SSN</label>
+                    <input type="text" name="Patient_SSN" required>
                 </div>
                 <div class="input-box">
                     <label>Password</label>
-                    <input type="password" name="Password">
+                    <input type="password" name="Password" required>
                 </div>
-
                 <div class="forgot">
                     <a href="#">Forgot Password?</a>
                 </div>
-
                 <div class="link">
                     No account? -> <a class="login-register" href="register.html">Register</a>
                 </div>
-
-                <input class="loginbtn" type="submit" value="Login">
-            </form>         
-
+                <button class="loginbtn" type="submit">Login</button>
+            </form>
+        </div>
     </div>
 
+    <script src="script.js"></script>
 </body>
 </html>

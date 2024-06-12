@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="style.css">
+    <title>DailyPharma</title>
+</head>
+<body>
+
+    <!--Header-->
+    <section>
+        <header>
+            <div class="logo">
+                <a href="index.html">DailyPharma</a>
+            </div>
+
+            <nav class= navbar id="navbar">
+                <a href="index.html">Home</a>
+                <a href="#service">About Us</a>
+                <a href="#feature">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#footer">Contact Us</a>
+                <a href="login.html" class="btn-login-popup" >Login</a>    
+            </nav>
+
+            <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+            <div id="menu" onclick="toggleOverlay()">
+                <div id="menu-content">
+                    <a href="index.html">Home</a>
+                    <a href="#service">About Us</a>
+                    <a href="#feature">Features</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#footer">Contact Us</a>
+                    <a href="login.html">Login</a>
+                </div>
+            </div>
+        </header>
+    </section>
+
+    <!--Above the fold content-->
+    <section class="above-fold">
+        <div class="headline">
+            <p>
+                CONVINIENT ONLINE DRUG DISPENSING AT DAILY PHARMA <span>Your Health, Our Priority</span>
+            </p>
+        </div>
+        <div class="subheadline">
+            <p>
+                Effortlessly Manage Your Medications with DailyPharma's User-Friendly Platform
+            </p>
+        </div>
+        <div class="actionCall">
+            <p><a href="register.html">
+                <span>Join DailyPharma today</a><br></span> <br>and never worry about your medical needs again.</p>
+        </div>
+    </section>
+
+<!--BELOW THE FOLD-->
+    <!--About us section-->
+    <section id="service" class="item below-fold">
+        <div class="title-text">
+            <p>SERVICES</p>
+            <h1>We Provide Better</h1>
+        </div>
+
+        <div class="service-box">
+            <p>
+                Welcome to our pharmacy website! We are dedicated to providing exceptional healthcare services to our patients,
+                 and easy management for doctors, pharmacies and. 
+                Our system is designed to streamline the entire process, ensuring efficient and personalized care.           
+            </p>
+
+            <div class="single-service">
+                <img src="images/iconPatient.jpg" alt="patient">
+                <div class="Overlay"></div>
+                <div class="service-desc">
+                    <h3>Patient</h3>
+                    <hr>
+                    <p>
+                        We provide patients with accessible prescription ordering and acquisition enabling us to provide tailored healthcare solutions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="single-service">
+                <img src="images/doctor.png" alt="doctor">
+                <div class="Overlay"></div>
+                <div class="service-desc">
+                    <h3>Doctor</h3>
+                    <hr>
+                    <p>
+                        We record their name, specialty, and years of experience to ensure expert medical attention, and provide an interface to prescribe drugs.
+                    </p>
+                </div>
+            </div>
+
+            <div class="single-service">
+                <img src="images/iconPharmacy.jpg" alt="pharmacy">
+                <div class="Overlay"></div>
+                <div class="service-desc">
+                    <h3>Pharmacy</h3>
+                    <hr>
+                    <p>
+                        We provide an interface for pharmacies to prescribe drugs, manage prescriptions and online drug orders.
+                    </p>
+                </div>
+            </div>
+
+            <div class="single-service">
+                <img src="images/iconPharmacy.jpg" alt="pharmacy">
+                <div class="Overlay"></div>
+                <div class="service-desc">
+                    <h3>Pharmacy</h3>
+                    <hr>
+                    <p>
+                        We provide an interface for pharmacies to prescribe drugs, manage prescriptions and online drug orders.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--Benefits-->
+    <section id="feature" class="item below-fold">
+        <div class="title-text">
+            <p>FEATURES</p>
+            <h1>Why Choose US</h1>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Easy Prescription Management</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <img src="images/iconMedicine.png">
+                        </div>
+                        <p>
+                            Simplify your medication routine with DailyPharma's intuitive platform.
+                            Easily manage your prescriptions, refills, and dosage reminders in one place.    
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-img">
+                <img src="images/iconPres-mgt2.jpg">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Convenient Online Ordering</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-shopping-cart-alt"></i>
+                        </div>
+                        <p>
+                            Say goodbye to long waits at the pharmacy. 
+                            With DailyPharma, you can order your medications from the comfort of your home and have them delivered right to your doorstep.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-img">
+                <img src="images/orderOnline.jpg">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Secure and Confidential</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-file-lock-alt"></i>
+                        </div>
+                        <p>
+                            At DailyPharma, we prioritize your privacy and security.
+                            Rest assured that your personal information and medical history are protected with robust encryption and strict confidentiality measures.    
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-img">
+                <img src="images/iconSecure.jpg">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>Extensive Medication Inventory</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-store"></i>
+                        </div>
+                        <p>
+                            With a wide range of prescription medications available, DailyPharma covers a comprehensive list of commonly prescribed drugs.
+                            Find what you need and rely on us for accurate and reliable dispensing.                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="features-img">
+                <img src="images/iconInventory.jpg">
+            </div>
+        </div>
+
+        <div class="feature-box">
+            <div class="features">
+                <h1>User-Friendly Interface</h1>
+                <div class="features-desc">
+                    <div class="feature-text">
+                        <div class="features-icon">
+                            <i class="uil uil-user-check"></i>
+                        </div>
+                        <p>
+                            Our user-friendly platform makes it easy to navigate and access all the features you need.
+                             Enjoy a seamless and intuitive experience while managing your prescriptions.                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-img">
+                <img src="images/iconUserFriendly.jpg">
+            </div>
+        </div>
+        
+    </section>
+
+    <!--Testimonials-->
+    <section id="testimonials" class="item below-fold">
+        <div class="title-text">
+            <p>TESTIMONIALS</p>
+            <h1>What Clients Say</h1>
+        </div>
+
+        <div class="testimonial-row">
+            <div class="testimonial-col">
+                <div class="user">
+                    <i class="uil uil-user-nurse"></i>
+                    <div class="user-info">
+                        <h4>Mark T. <br></h4>
+                        <small>@P-markTT</small>
+                    </div>
+                </div>
+                <p>
+                    "As a busy professional, I don't have time to wait in line at the pharmacy.
+                     DailyPharma has made it incredibly easy for me to get my prescriptions online. 
+                     The user-friendly interface and automatic refill reminders ensure that I never run out of medication. 
+                     Highly recommended!"
+                </p>
+            </div>
+
+            <div class="testimonial-col">
+                <div class="user">
+                    <i class="uil uil-stethoscope"></i>
+                    <div class="user-info">
+                        <h4>Dr. John L., Family Physician <br></h4>
+                        <small>@D-johnLM</small>
+                    </div>
+                </div>
+                <p>
+                    "DailyPharma has streamlined the prescription management process for our clinic.
+                    Their platform is user-friendly, allowing us to electronically send prescriptions and communicate with patients efficiently. 
+                    It has greatly improved our workflow and patient care." 
+                </p>
+            </div>
+
+            <div class="testimonial-col">
+                <div class="user">
+                    <i class="uil uil-medical-square-full"></i>
+                    <div class="user-info">
+                        <h4>Emily S., Pharmacy Manager <br></h4>
+                        <small>@PH-emilySN</small>
+                    </div>
+                </div>
+                <p>
+                    "Managing prescriptions for our pharmacy has become much easier since partnering with DailyPharma.
+                     Their system integrates seamlessly with our operations, enabling us to process orders accurately and deliver medications promptly.
+                     The platform's simplicity has made a significant positive impact on our business." 
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <div class="item"></div>
+        <div class="actionCall">
+            <p>ARE YOU READY?</p>
+
+            <p>
+                <a href="register.html">
+                <span>Join DailyPharma today</a><br></span>
+                <br>and never worry about your medical needs again.</p>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <section id="footer">
+        <div class="title-text">
+            <p>CONTACT US</p>
+            <h1>Any Queries?</h1>
+        </div>
+
+        <div class="footer-row">
+            <div class="footer-left">
+                <h1>Contact information</h1>
+                <div class="contact-link">
+
+                    <div class="contact-info">
+                        <i class="uil uil-twitter"></i>
+                        <span>@DailyPharma</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-instagram"></i>
+                        <span>@TheDailyPharma</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-facebook"></i>
+                        <span>@DailyPharma</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-linkedin"></i>
+                        <span>@DailyPharma - Medical Website</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-at"></i>
+                        <span>DailyPharma@gmail.com</span>
+                    </div>
+
+                    <div class="contact-info">
+                        <i class="uil uil-calling"></i>
+                        <span>0769690000</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer-right">
+                <div class="quick-links">
+                    <h1>Quick Links</h1>
+                    <ul>
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="#service">About Us</a></li>
+                      <li><a href="#feature">Features</a></li>
+                      <li><a href="#">FAQ</a></li>
+                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="#">Terms and Conditions</a></li>
+                    </ul>
+                  </div>
+            </div>
+        </div>
+
+        <div class="additional-info">
+            <p>&copy; 2023 DailyPharma. All rights reserved.</p>
+        </div>
+    </section>
+    <script src="script.js"></script>
+    <script src="script2.js"></script>
+</body>
+</html>
