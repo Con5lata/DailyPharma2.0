@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $conn->close();
             
                     // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: ../patients/patientView.php");
+                    header("Location: patientView.php");
                     exit;
                 } else {
                     $error .= 'The password is not valid.';

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style3.css">
+    <title>DailyPharma</title>
+    
+</head>
+<body>
+    <!--Header-->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="#">DailyPharma</a>
+            </div>
+            <nav>
+                <ul class="navbar">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#" class="cart"><i class="uil uil-shopping-cart"></i> Cart (0)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!--Main Content-->
+    <!--Main Content-->
+    <main class="container">
+        <!--Banner-->
+            <h1>Welcome to The DailyPharma Store</h1>
+            <p>Your one-stop shop for all medical needs</p>
+            <form class="search-form">
+                <input type="text" placeholder="Search for drugs..." class="search-input">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+    
+        <!--Product Listing-->
+        <section class="products">
+            <h2>Our Products</h2>
+            <div class="product-filters">
+                <select class="filter-category">
+                    <option value="all">All Categories</option>
+                    <option value="pain-relief">Pain Relief</option>
+                    <option value="cold-flu">Cold & Flu</option>
+                    <option value="vitamins">Vitamins</option>
+                    <option value="prescription">Prescription</option>
+                </select>
+                <select class="filter-price">
+                    <option value="all">All Prices</option>
+                    <option value="under-10">499ksh Under</option>
+                    <option value="10-20">500- 999ksh</option>
+                    <option value="20-50">1000ksh- 2500</option>
+                    <option value="50-plus">2500ksh & Above</option>
+                </select>
+            </div>
+            <div class="product-list">
+                <!-- Example Product -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                    <h3>Aspirin</h3>
+                    <p>ksh70.00</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                    <h3>Tylenol</h3>
+                    <p>ksh460.00</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                    <h3>Vitamin C</h3>
+                    <p>ksh750.00</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                    <h3>Ibuprofen</h3>
+                    <p>ksh100.00</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+                <!-- Add more products as needed -->
+            </div>
+        </section>
+
+        <!--Product Details (Hidden by default, shown when a product is clicked)-->
+        <section class="product-details">
+            <div class="product-details-content">
+                <img src="https://via.placeholder.com/300" alt="Product Image">
+                <div class="product-info">
+                    <h2>Product Name</h2>
+                    <p class="price">$10.00</p>
+                    <p class="description">Detailed description of the product goes here. This includes usage, benefits, and any other important information.</p>
+                    <button class="btn btn-primary">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!--Shopping Cart-->
+        <section class="shopping-cart">
+            <h2>Shopping Cart</h2>
+            <div class="cart-items">
+                <div class="cart-item">
+                    <img src="https://via.placeholder.com/100" alt="Product Image">
+                    <div class="item-info">
+                        <h3>Product Name</h3>
+                        <p>$10.00</p>
+                        <input type="number" value="1" min="1">
+                        <button class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+                <!-- Repeat for more cart items -->
+            </div>
+            <div class="cart-summary">
+                <h3>Total: $10.00</h3>
+                <button class="btn btn-success">Checkout</button>
+            </div>
+        </section>
+    </main>             
+
+    <!--Footer-->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 DrugStore. All Rights Reserved.</p>
+        </div>
+    </footer>
+<script src="../script3.js"></script>
+</body>
+</html>

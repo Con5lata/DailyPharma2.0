@@ -8,6 +8,16 @@
     
 }
 
+/* 
+body{
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+
+*/
 
 .item{
     margin-bottom: 100px;
@@ -764,15 +774,13 @@ hr{
 }
 
 /*Login Section*/
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 110%;
-    justify-content: center;
-    display: none;
-}
 
+.form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+}
 
 .form .login_patient,.login_doctor,.login_pharmacy,.login_company,.login_admin{
     transform: translateX(600PX);
