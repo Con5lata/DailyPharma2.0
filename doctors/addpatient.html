@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style4.css">
+    <title>Add New Patient</title>
+</head>
+
+<!--Header-->
+<header>
+    <div class="logo">
+        <a href="index.html">DailyPharma</a>
+    </div>
+
+    <div class="navbar">
+        <nav class= navbar id="navbar">
+            <a href="index.html">Home</a>
+            <a href="#about">Features</a>
+            <a href="#footer">Contact Us</a>
+            
+            <a href="profile.html">
+                <i class="uil uil-user"></i>Profile
+            </a><!--Place username here-->
+    
+            <a href="doctorlogin.html" class="btn-login-popup" >Logout</a>                
+
+         
+        </nav>
+
+    </div>
+
+    <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+    <div id="menu" onclick="toggleOverlay()">
+        <div id="menu-content">
+            <a href="index.html">Home</a>
+            <a href="#about">Features</a>
+            <a href="#footer">Contact Us</a>
+            <a href="profile.html">Profile</a><!--Place username here-->
+            <a href="doctorlogin.html">Logout</a>
+        </div>
+    </div>
+</header>
+
+<body>
+    <div class="container my-5">
+        <h2>Add New Patient</h2>
+        <form action="addpatient.php" method="post">
+            <div class="form-group">
+                <label for="Patient_SSN">SSN:</label>
+                <input type="text" class="form-control" id="Patient_SSN" name="Patient_SSN" required>
+            </div>
+            <div class="form-group">
+                <label for="Patient_Name">Name:</label>
+                <input type="text" class="form-control" id="Patient_Name" name="Patient_Name" required>
+            </div>
+            <div class="form-group">
+                <label for="Patient_Email">Email:</label>
+                <input type="email" class="form-control" id="Patient_Email" name="Patient_Email" required>
+            </div>
+            <div class="form-group">
+                <label for="Patient_Phone">Phone:</label>
+                <input type="text" class="form-control" id="Patient_Phone" name="Patient_Phone" required>
+            </div>
+            <div class="form-group">
+                <label for="Patient_Age">Date of Birth:</label>
+                <input type="date" class="form-control" id="Patient_Age" name="Patient_Age" required>
+            </div>
+            <div>
+            <button type="submit" class="btn btn-primary">Add Patient</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

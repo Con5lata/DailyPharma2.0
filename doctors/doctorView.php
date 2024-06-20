@@ -1,4 +1,51 @@
-<?php include "../inc/view_header.php";?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <title> DailyPharma - Doctor Home</title>
+</head>
+<body class="DoctorView">
+
+    <!--Header-->
+    <header>
+        <div class="logo">
+            <a href="index.html">DailyPharma</a>
+        </div>
+
+        <div class="navbar">
+            <nav class= navbar id="navbar">
+                <a href="index.html">Home</a>
+                <a href="#about">Features</a>
+                <a href="#footer">Contact Us</a>
+                
+                <a href="profile.html">
+                    <i class="uil uil-user"></i>Profile
+                </a><!--Place username here-->
+        
+                <a href="doctorlogin.html" class="btn-login-popup" >Logout</a>                
+    
+             
+            </nav>
+    
+        </div>
+
+        <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+        <div id="menu" onclick="toggleOverlay()">
+            <div id="menu-content">
+                <a href="index.html">Home</a>
+                <a href="#about">Features</a>
+                <a href="#footer">Contact Us</a>
+                <a href="profile.html">Profile</a><!--Place username here-->
+                <a href="doctorlogin.html">Logout</a>
+            </div>
+        </div>
+    </header>
 
     <!-- Above fold -->
     <div class="image-container" id="about">
@@ -44,9 +91,18 @@
 
             <div class="category-content" id="Manage-Patients">
                 <div class="container my-5">
-                    <h2>List of Patients</h2>            
+                    <h2>List of Patients</h2>
                     <br>
-                    <a class="btn btn-primary" href="patientList.php" role="button">Add New Patient</a>
+                    <a class="btn btn-primary" href="addpatient.html" role="button">Add New Patient</a>
+                    <br>
+                    <br>
+                    <!-- Search Container -->
+                    <form action="search_patient.php" method="get">
+                        <div class="search-container">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </form>
                     <br>
                     <table class="table">
                         <thead>
@@ -55,44 +111,26 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                                <th>Action</th>
+                                <th>AGE</th>
                             </tr>
                         </thead>
-
                         <tbody>
-
-                            <?php
-                            require_once("../connect.php");                     
-
-                            $result = $conn->query("
-                            SELECT p.Patient_SSN, p.Patient_Name, p.Patient_Email, p.Patient_Phone, p.Patient_Gender, p.Patient_Age
-                            FROM patients p
-                            INNER JOIN doctor_patient dp ON p.Patient_SSN = dp.Patient_SSN
-                            WHERE dp.Doctor_SSN = '$ID' AND p.status = 'active'");
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>";
-                                    echo "<td>" . $row["Patient_SSN"] . "</td>";
-                                    echo "<td>" . $row["Patient_Name"] . "</td>";
-                                    echo "<td>" . $row["Patient_Email"] . "</td>";
-                                    echo "<td>" . $row["Patient_Phone"] . "</td>";
-                                    echo "<td>" . $row["Patient_Gender"] . "</td>";
-                                    echo "<td>" . $row["Patient_Age"] . "</td>";
-                                    echo "<td>";
-                                    echo "<a class='btn btn-danger btn-sm' href='confirmDeletePatient.php?id=" . $row["Patient_SSN"] . "'>Delete</a>";
-                                    echo "</td>";
-                                    echo "</tr>";
-                                }
-                            }
-                            ?>
-
+                            
+                            <tr >
+                                <td>$row[Patient_SSN]</td>                
+                                <td>$row[Patient_Name]</td>
+                                <td>$row[Patient_Email]</td>
+                                <td>$row[Patient_Phone]</td>
+                                <td>$row[Patient_Ages]</td>
+                                <td>
+                                    <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            
 
             <div class="category-content" id="Prescribe-Drugs">
                 <div class="form">
@@ -101,58 +139,35 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="patient_ssn">Patient SSN</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="patient_ssn" name="patient_ssn" required>
+                                <input type="text" id="patient_ssn"  class="form-control" name= "Patient_SSN" required>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="doctor_ssn">Doctor SSN</label>
                             <div class="col-sm-6">
-                                <input type="text" id="doctor_ssn" name="doctor_ssn" class="form-control" required>
+                                <input type="text" id="doctor_ssn" class="form-control" name="Doctor_SSN"  required>
                             </div>
                         </div>
         
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
+                            <label class="col-sm-3 col-form-label" for="drug_name">Drug ID</label>
                             <div class="col-sm-6">
-                                <select name="Drug_ID" id="Drug_ID" style="width: 200px;" required>
-                                    <?php
-                                    // Fetch drugs from the drugs table
-                                    $sql = "SELECT `Drug_ID`, `Drug_Name` FROM drugs";
-                                    $result = $conn->query($sql);
-
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
-                                            echo '<option value=" '. $row["Drug_ID"] .' "> '. $row["Drug_Name"] .' </option>';
-                                        }
-                                    } else {
-                                        echo '<option value="">No drugs found</option>';
-                                    }
-
-                                    $result->close();
-                                    ?>
-                                </select>
+                                <input type="text" id="drug_name" class="form-control" name="Drug_ID"  required>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="prescription_amt">Prescription Amount</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="prescription_amt" name="prescription_amt" required>
+                                <input type="text" class="form-control" id="prescription_amt" name="Prescription_Amt" required>
                             </div>
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Dosage</label>
+                            <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Insructions</label>
                             <div class="col-sm-6">
-                                <input type="text" class="form-control" id="prescription_dosage" name="prescription_dosage" required>
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="prescription_inst">Prescription Instructions</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="prescription_inst" name="prescription_inst" >
+                                <input type="text" class="form-control" id="prescription_dosage" name="Prescription_Instructions" required>
                             </div>
                         </div>
         
@@ -219,9 +234,9 @@
                 <div class="quick-links">
                     <h1>Quick Links</h1>
                     <ul>
-                      <li><a href="../index.html">Home</a></li>
-                      <li><a href="../index.html#service">About Us</a></li>
-                      <li><a href="../index.html#feature">Features</a></li>
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="#service">About Us</a></li>
+                      <li><a href="#feature">Features</a></li>
                       <li><a href="#">FAQ</a></li>
                       <li><a href="#">Privacy Policy</a></li>
                       <li><a href="#">Terms and Conditions</a></li>
@@ -242,7 +257,3 @@
     
 </body>
 </html>
-
-<?php
-$conn->close();
-?>
