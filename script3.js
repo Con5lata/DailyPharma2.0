@@ -1,26 +1,58 @@
+// Handling the overlay
+function toggleOverlay() {
+  var menu = document.getElementById("menu");
+  var menuContent = document.getElementById("menu-content");
 
-document.addEventListener('DOMContentLoaded', () => {
-const cartButton = document.querySelector('.cart');
-const productCards = document.querySelectorAll('.product-card');
-const productDetails = document.querySelector('.product-details');
-const shoppingCart = document.querySelector('.shopping-cart');
+  if (menu.style.width === "100%") {
+      menu.style.width = "0";
+      menuContent.style.display = "none";
+  } else {
+      menu.style.width = "100%";
+      menuContent.style.display = "block";
+  }
+}
 
-cartButton.addEventListener('click', () => {
-productDetails.style.display = 'none';
-shoppingCart.style.display = 'block';
-});
+// Function to handle window resize event
+function handleResize() {
+  var menu = document.getElementById("menu");
+  var menuContent = document.getElementById("menu-content");
 
-productCards.forEach(card => {
-card.addEventListener('click', () => {
-    const productName = card.querySelector('h3').innerText;
-    const productPrice = card.querySelector('p').innerText;
-    const productImage = card.querySelector('img').src;
+  if (window.innerWidth > 900) {
+      menu.style.width = "0";
+      menuContent.style.display = "none";
+  }
+}
 
-    productDetails.querySelector('h2').innerText = productName;
-    productDetails.querySelector('.price').innerText = productPrice;
-    productDetails.querySelector('img').src = productImage;
-    productDetails.style.display = 'flex';
-    shoppingCart.style.display = 'none';
-});
-});
-});
+// Call the handleResize function initially and on window resize
+handleResize();
+window.addEventListener("resize", handleResize);
+
+// Get the necessary elements for the image slider
+const slideContainer = document.querySelector('.image-slide');
+const slideDescriptions = document.querySelectorAll('.image-desc');
+const arrowLeft = document.querySelector('.arrow-left');
+const arrowRight = document.querySelector('.arrow-right');
+
+// Initialize the index of the active description
+let activeIndex = 0;
+
+// Show the initial active description
+slideDescriptions[activeIndex].classList.add('active');
+
+// Function to show the previous description
+function showPreviousSlide() {
+  slideDescriptions[activeIndex].classList.remove('active');
+  activeIndex = (activeIndex - 1 + slideDescriptions.length) % slideDescriptions.length;
+  slideDescriptions[activeIndex].classList.add('active');
+}
+
+// Function to show the next description
+function showNextSlide() {
+  slideDescriptions[activeIndex].classList.remove('active');
+  activeIndex = (activeIndex + 1) % slideDescriptions.length;
+  slideDescriptions[activeIndex].classList.add('active');
+}
+
+// Add event listeners to the arrow buttons
+arrowLeft.addEventListener('click', showPreviousSlide);
+arrowRight.addEventListener('click', showNextSlide);
