@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif; 
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global Styles */
+
+h1 {
+  font-size: 50px;
+  line-height: 64px;
+  color: #222;
+  font-weight: 700; 
+}
+
+h2 {
+  font-size: 46px;
+  line-height: 54px;
+  color: #222;
+  font-weight: 700; 
+}
+
+h4 {
+  font-size: 19px;
+  color: #222;
+  font-weight: 700; 
+}
+h5 {
+    font-size: 17px;
+    font-weight: 700
+  
+}
+
+h6 {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+p {
+  font-size: 16px;
+  color: #1e2120;
+  margin: 15px 0 20px 0;
+  font-weight: 700; 
+}
+
+.section-p1 {
+  padding: 40px 80px;
+}
+
+.section-m1 {
+  margin: 40px 0;
+}
+
+body {
+  width: 100%;
+  padding-top: 30px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 50px;
+  margin-bottom: 100px;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(20px); 
+  z-index: 3;
+}
+
+.logo {
+  font-size: 2em;
+  color: black;
+  cursor: pointer;
+  font-weight: 700;
+  top: 10%;
+  left: 0;
+}
+
+.logo a {
+  text-decoration: none;
+  color: black;
+  top: 0%;
+  left: 0;
+}
+
+nav {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+nav a:not(:last-child) {
+  position: relative;
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-right: 30px;
+}
+
+nav a:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 3px;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: black;
+  color: black;
+  transition: transform .5s;
+}
+
+nav a:not(:last-child):hover::after {
+  transform-origin: right;
+  transform: scaleX(1);
+  background: black;
+  color: black;
+}
+
+.navbar-toggle {
+  display: none;
+  float: right;
+  color: #333;
+  font-size: 24px;
+  padding: 16px 20px;
+  cursor: pointer;
+}
+
+#menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 0;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: rgba(81, 217, 185, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+#menu-content {
+  display: none;
+}
+
+#menu-content a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+#menu-content a:hover {
+  color: black;
+}
+
+.btn-login-popup,
+.btn-logout {
+  width: 130px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid black;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  padding-top: 6px;
+  transition: all .5s ease;
+}
+
+.btn-login-popup:hover,
+.btn-logout:hover {
+  background-color: black;
+  color: whitesmoke;
+  font-size: 1.2em;
+}
+
+@media screen and (max-width: 900px) {
+  .navbar-toggle {
+    display: block;
+  }
+
+  .navbar a {
+    display: none;
+  }
+
+  #menu {
+    display: flex;
+    justify-content: center;
+  }
+
+  .headline p {
+    margin-left: 20px;
+  }
+
+  #menu-content a {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .btn-login-popup,
+  .btn-logout {
+    display: none;
+  }
+}
+
+/* Shop Page */
+#page-header {
+  background-image: url("images/bg3.jpg");
+  width: 100%;
+  height: 40vh;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 14px;
+}
+
+#product1 .pro{
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid #dae8e6;
+    border-radius:25px;
+    cursor: pointer;
+    box-shadow: 20px 20px 30px rgba(70, 182, 184, 0.2);
+    margin: 15px 0;
+    transform: 0.2s ease;
+}
+
+#product1 .pro:hover{
+    box-shadow: 20px 20px 30px rgba(70, 182, 184, 0.6);
+}
+#product .pro img{
+    width: 100%;
+    border-radius: 20px;
+}
+#product .pro .des{
+    text-align: start;
+    padding: 10px 0;
+}
+#product .pro .des h5{ 
+    padding: top 7px;   
+}
+#product .pro .des i {
+    font-size: 12px;
+    color: rgb(243, 181, 25);
+}
