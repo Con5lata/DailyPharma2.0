@@ -10,3 +10,15 @@ smallimg[1].onclick = function() {
 smallimg[2].onclick = function() {
     MainImg.src = smallimg[2].src;
 }
+
+smallimg[3].onclick = function() {
+    MainImg.src = smallimg[3].src;
+}
+
+var quantityInput = document.getElementById('quantity');
+
+quantityInput.addEventListener('input', function() {
+    if (quantityInput.value < 1) {
+        quantityInput.value = 1;
+    }
+});
