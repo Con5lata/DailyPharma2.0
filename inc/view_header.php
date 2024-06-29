@@ -42,9 +42,6 @@ $username = $_SESSION["username"];
                 <a href="../index.html">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="../logout.php" class="btn-login-popup">Logout</a>    
-            </nav>
-    
             <?php
                 echo '<div class="profile">';
                 echo '<a href="profile.php">';
@@ -52,6 +49,8 @@ $username = $_SESSION["username"];
                 echo '</a>';
                 echo '</div>';
             ?>
+            <a href="../logout.php" class="btn-login-popup">Logout</a>   
+         </nav>
         </div>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>

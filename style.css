@@ -691,6 +691,42 @@ hr{
         flex-direction: column;
     }
 }
+/* Edit Profile*/
+#profile-form h2 {
+    /* Your styles here */
+    font-size: 3em;
+    color: #03312d;
+    text-align: center;
+}
+#profile-form{
+    background: url(images/bg3.jpg);
+    background-size: cover;
+    min-height: 100vh; 
+    padding: 20px; 
+}
+/* Style for transparent container */
+.transparent-container {
+    padding-top: 40px;
+    max-width: 700px;
+    background: transparent;
+    border-radius: 8px;
+    padding: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+/* Ensure form controls are styled consistently */
+.form-control {
+    margin-top: 0.25rem; 
+    border-radius: 4px; 
+    border: 1px solid #ced4da; 
+}
+
+/*labels */
+.col-form-label {
+    margin-bottom: 0.5rem;
+    font-weight: 500; 
+    color: black;
+}
 
 /*--Login Page--*/
 
@@ -1175,7 +1211,9 @@ label.left{
 #inquiries{
 padding: 100px;
 }
-
+#profile-form {
+    padding-top: 80px; 
+  }
 .form .col-form-label{
 font-weight: 500;
 }

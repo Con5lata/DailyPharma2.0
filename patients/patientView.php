@@ -265,46 +265,5 @@ $drugInformation[] = $row;
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
     <script src="../script4.js"></script>
-    
-    <script>
-        const selectElement = document.getElementById("availableDrugs");
-        const drugInfoDiv = document.getElementById("drugInfo");
-        const drugNameParagraph = document.getElementById("drugName");
-        const drugPriceParagraph = document.getElementById("drugPrice");
-        const drugDescriptionParagraph = document.getElementById("drugDescription");
-        const drugManufacturingDateParagraph = document.getElementById("drugManufacturingDate");
-        const drugExpirationDateParagraph = document.getElementById("drugExpirationDate");
-
-        selectElement.addEventListener("change", (event) => {
-            const selectedDrug = event.target.value;
-            if (selectedDrug) {
-                //convert from php array to js array
-                const drug = <?php echo json_encode($drugInformation); ?>;
-                const selectedDrugID = drug.find((item) => item.Drug_ID === selectedDrug);
-                
-                fetch("store_selected_drug.php", {
-                    method: "POST",
-                    body: JSON.stringify({ selectedDrug }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                });
-                if (selectedDrugID) {
-                    drugNameParagraph.textContent = "Drug Name: " + selectedDrugID.Drug_Name;
-                    drugPriceParagraph.textContent = "Price: " + selectedDrugID.Drug_Price;
-                    drugDescriptionParagraph.textContent = "Description: " + selectedDrugID.Drug_Description;
-                    drugManufacturingDateParagraph.textContent = "Manufacturing Date: " + selectedDrugID.Drug_Manufacturing_Date;
-                    drugExpirationDateParagraph.textContent = "Expiration Date: " + selectedDrugID.Drug_Expiration_Date;
-                    drugInfoDiv.style.display = "block";
-                } else {
-                    drugInfoDiv.style.display = "none";
-                }
-            } else {
-                drugInfoDiv.style.display = "none";
-            }
-        });
-    </script>
-    
 </body>
 </html>
