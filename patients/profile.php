@@ -21,6 +21,35 @@ $gender = $row["gender"];
 $dob = $row["Patient_DOB"];
 $age = $row["Patient_Age"];
 
+$name = $row["Patient_Name"];
+$email = $row["Patient_Email"];
+$phone = $row["Patient_Phone"];
+$gender = $row["gender"];
+$dob = $row["Patient_DOB"];
+$age = $row["Patient_Age"];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update"])) {
+    // Get data from POST
+    $name = $_POST["Patient_Name"];
+    $email = $_POST["Patient_Email"];
+    $phone = $_POST["Patient_Phone"];
+    $gender = $_POST["gender"];
+    $dob = $_POST["Patient_DOB"];
+    $age = $_POST["Patient_Age"];
+    
+    // Update the database
+    $update_sql = $conn->prepare("UPDATE patients SET Patient_Name=?, Patient_Email=?, Patient_Phone=?, gender=?, Patient_DOB=?, Patient_Age=? WHERE Patient_SSN=?");
+    $update_sql->bind_param("ssssssi", $name, $email, $phone, $gender, $dob, $age, $ID);
+    $update_sql->execute();
+    
+    header("location: patientView.php");
+    exit;
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cancel"])) {
+    header("location: ../patients/patientView.html");
+    exit;
+}
 ?>
 
 
@@ -113,6 +142,12 @@ $age = $row["Patient_Age"];
                     <input type="text" class="form-control" name="Patient_Age" value="<?php echo $age?>" readonly>
                 </div>
             </div>
+            <div class="row mb-3">
+                    <div class="col-sm-6 offset-sm-3">
+                        <button type="submit" name="update" class="btn btn-primary">Update</button>
+                        <button type="submit" name="cancel" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
         </form>
     </div>
 </section>

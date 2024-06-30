@@ -1208,12 +1208,10 @@ label.left{
     border-radius: 10px;
 }
 
-#inquiries{
-padding: 100px;
-}
 #profile-form {
     padding-top: 80px; 
   }
+  
 .form .col-form-label{
 font-weight: 500;
 }

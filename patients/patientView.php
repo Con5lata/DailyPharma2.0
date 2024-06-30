@@ -261,9 +261,8 @@ $drugInformation[] = $row;
         </div>
     </section>
 
-
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
-    <script src="../script4.js"></script>
+   <script src="../script4.js"></script>
 </body>
 </html>

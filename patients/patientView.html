@@ -41,7 +41,7 @@
                 <a href="#about">Features</a>
                 <a href="#inquiries">Inquiries</a>
                 <a href="#footer">Contact Us</a>
-                <a href="profile.html">Profile</a><!--Place username here-->
+                <a href="../patients/profile.php">Profile</a>
                 <a href="login.html">Logout</a>
             </div>
         </div>
@@ -110,14 +110,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>               
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                    </tr>
+                                
+                                <?php 
+                                    // Establish a connection to the database
+                                    require_once("../connect.php");
+    
+                                    // Retrieve prescription data from the database
+                                    $sql = "SELECT * FROM prescriptions WHERE Prescribed = 'N' AND `Patient_SSN` = '$ID';";
+                                    $result = $conn->query($sql);
+    
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "</tr>";
+                                            echo "<tr>";                                         
+                                            echo "<td>" . $row["Prescription_ID"]. "</td>";
+                                            echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                            echo "<td>" . $row["Doctor_SSN"]. "</td>";
+                                            echo "<td>" . $row["Drug_ID"] . "</td>";
+                                            echo "<td>" . $row["Prescription_Amount"] . "</td>";
+                                            echo "<td>" . $row["Prescription_Dosage"] . "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                    }
+                                    ?>
                             </tbody>
                         </table>
                 </div>
@@ -178,7 +195,7 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <div class="col-sm-3 d-grid">
-                        <a class="btn btn-outline-primary" href="/users/patientindex.php" role="button">Cancel</a>
+                        <a class="btn btn-outline-primary" href="../patients/patientView.html" role="button">Cancel</a>
                     </div>
                 </div>
             </form>
