@@ -785,7 +785,8 @@ hr{
     padding: 7px;
     border-radius: 10px;
     font-weight: 400;
-    color: black;
+    background-color: #040404;
+    color: whitesmoke;
     cursor: pointer;
     transition: .5s ease;
 }
@@ -795,54 +796,37 @@ hr{
 }
 
 .users button:hover{
-    background-color: black;
+    background-color: rgb(20, 72, 68);
     color: white;
 }
-
 /*Login Section*/
 
-.form{
+.form {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the form */
     align-items: center;
     width: 400px;
+    overflow: hidden; /* Add this to hide overflow */
 }
 
-.form .login_patient,.login_doctor,.login_pharmacy,.login_company,.login_admin{
-    transform: translateX(600PX);
-    transition: 2s ease;
+.form .login_patient {
+    display: block; /* Show patient login form by default */
 }
 
-.form .login_admin.active{
-    transform: translateX(-780px);
+.users {
+    display: none;
 }
 
-.form .login_company.active{
-    transform: translateX(-520px);
-}
-
-.form .login_pharmacy.active{
-    transform: translateX(-330px);
-}
-
-.form .login_patient.active{
-    transform: translateX(-90px);
-}
-
-.form .login_doctor.active{
-    transform: translateX(110px);
-}
-
-.input-box{
+.input-box {
     position: relative;
     width: 230px;
     height: 40px;
     border-bottom: 2px solid black;
     margin: 20px 0;
-    transition: .5s ease-in-out;
+    transition: 0.5s ease-in-out;
 }
 
-.input-box label{
+.input-box label {
     position: absolute;
     top: 50%;
     left: -100px;
@@ -851,15 +835,11 @@ hr{
     font-weight: 500;
 }
 
-.login_company label{
-    left: -150px ;
+.login_pharmacy label {
+    left: -150px;
 }
 
-.login_pharmacy label{
-    left: -150px ;
-}
-
-.input-box input{
+.input-box input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -867,27 +847,29 @@ hr{
     outline: none;
     font-size: 1em;
     color: black;
-    font-weight: 500; 
+    font-weight: 500;
     position: relative;
     left: 10px;
 }
 
-.forgot{
+.forgot {
     text-align: right;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-.forgot a, .link a{
+.forgot a,
+.link a {
     text-decoration: none;
-    color: black; 
+    color: black;
 }
 
-.forgot a:hover ,.link a:hover{
+.forgot a:hover,
+.link a:hover {
     text-decoration: underline;
 }
 
-.link{
+.link {
     width: 230px;
     display: flex;
     justify-content: space-between;
@@ -895,7 +877,8 @@ hr{
     margin-bottom: 15px;
 }
 
-.loginbtn, .registerbtn{
+.loginbtn,
+.registerbtn {
     width: 200px;
     height: 45px;
     color: white;
@@ -908,22 +891,22 @@ hr{
     transition: 1s ease;
 }
 
-.loginbtn:hover , .registerbtn:hover{
+.loginbtn:hover,
+.registerbtn:hover {
     background: rgb(193, 187, 187);
     color: black;
 }
 
-.btn-outline-primary{
+.btn-outline-primary {
     color: black;
     border: none;
     margin-bottom: 15px;
 }
 
-.btn
-
-label.left{
+.btn label.left {
     left: -80px;
 }
+
 
 /*Register Section*/
 
@@ -1275,10 +1258,6 @@ border: 2px solid black;
     margin-left: 50px;
 }
 
-.CompanyView .image-container{
-    background-image: url(images/pharma-home.jpg);
-    zoom: 1.3;
-}
 
 #Manage-Contracts, #Manage-Drugs, #Manage-Prescriptions, #Prescription-History, #Online-Orders{
     position: relative;
