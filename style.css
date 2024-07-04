@@ -915,6 +915,23 @@ hr{
     left: -80px;
 }
 
+
+.Register .wrapper{
+    height: 700px;
+    transition: .5s;
+    top: -7%;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Register{
+    background-size: cover;
+    height: 150vh;   
+}
+
 /*Patients View */
 .DoctorView header, .PatientView header{
     position: fixed;
