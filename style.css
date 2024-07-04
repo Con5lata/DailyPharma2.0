@@ -801,19 +801,14 @@ hr{
 }
 /*Login Section*/
 
-.form-wrapper {
-    display: flex;
-    justify-content: center; /* Center the form horizontally */
-    align-items: center; /* Center the form vertically */
-    height: 100vh; /* Full height to center vertically */
-}
-
 .form {
     display: flex;
-    justify-content: center; /* Center the form */
+    justify-content: center; 
     align-items: center;
     width: 400px;
-    overflow: hidden; /* Add this to hide overflow */
+    overflow: hidden; 
+    height: 100vh; 
+    padding-left: 0px;
 }
 
 .form .login_patient {
@@ -1089,6 +1084,18 @@ hr{
     box-shadow: 0 0 10px #0ea83d;
 }
 
+#inquiries {
+
+    padding: 50px 0; /* Padding to create space around the section */
+    text-align: center; /* Center-align text */
+    justify-content: center;
+}
+#inquiries .form {
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    align-items: center; /* Center the form vertically */
+    padding-left: 100px;
+}
 /* Drugs */
 .drug_section{
     padding: 30px;

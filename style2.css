@@ -165,3 +165,12 @@ nav a:not(:last-child):hover::after{
         display: none;
     }
 }
+.form {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 400px;
+    overflow: hidden; 
+    height: 100vh; 
+    padding-left: 50px;
+}
