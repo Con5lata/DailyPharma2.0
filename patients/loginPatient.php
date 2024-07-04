@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $conn->close();
             
                     // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: patientView.php");
+                    header("Location: patientView.html");
                     exit;
                 } else {
                     $error .= 'The password is not valid.';
@@ -53,33 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Check if there is an error, and if so, display an alert
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = '../login.html';</script>";
+    echo "<script>window.location.href = '../patientlogin.html';</script>";
     exit;
 }
 
-
-/*
-if (!empty($error)) {
-    // Adding encryption to the error message so that it does not show up on the search bar when appended
-    $key = 'my_key';
-    $encryptedError = encryptError($error, $key);
-
-    // Redirect to the index page with encrypted error message
-    header("Location: login.html?error=" . urlencode($encryptedError));
-    exit;
-}
-
-// Encryption function
-function encryptError($error, $key) {
-    $encryptedError = '';
-    $keyLength = strlen($key);
-    $errorLength = strlen($error);
-
-    for ($i = 0; $i < $errorLength; $i++) {
-        $encryptedError .= $error[$i] ^ $key[$i % $keyLength];
-    }
-
-    return base64_encode($encryptedError);
-}*/
 
 ?>

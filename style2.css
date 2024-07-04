@@ -167,24 +167,31 @@ nav a:not(:last-child):hover::after{
 }
 
 
-    /* Specific styles for the Patient Login form */
-    .Login, .Register{
-    background: url(images/bg3.jpg) no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Specific styles for the Patient Login form */
+.Login, .Register{
+background: url(images/bg3.jpg) no-repeat;
+background-position: center;
+background-size: cover;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
 }
-.wrapper {
 
-  width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background: transparent;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.wrapper{
+    background: transparent;
+    backdrop-filter: blur(30px);
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px 0px;
+    padding-bottom: 100px;
+    overflow: hidden; 
 }
 
 .title-text {
