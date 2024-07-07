@@ -7,7 +7,7 @@ const wrapper = document.querySelector('.wrapper');
 const patientACR = document.querySelector('.register_patient');
 const doctorACR = document.querySelector('.register_doctor');
 const pharmacyACR = document.querySelector('.register_pharmacy');
-const companyACR = document.querySelector('.register_company');
+
 
 activePatientR.addEventListener('click', ()=> {
     wrapper.style.height = "800px";

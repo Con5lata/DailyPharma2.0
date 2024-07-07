@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Check if there is an error, and if so, display an alert
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = '../doctorlogin.html';</script>";
+    echo "<script>window.location.href = 'doctorlogin.html';</script>";
     exit;
 }
 

@@ -1,61 +1,59 @@
 <?php
 
-//establish a php session
+// Start session
 session_start();
 
-//establish a connection
+// Establish a connection
 require_once("../connect.php");
 
-//creating a variable to hold errors that may occur uppon login
+// Variable to hold error messages
 $error = '';
 
-
-//first if to prevent injection of data into the search bar, security
+// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $patientSSN = trim($_POST['Patient_SSN']);
     $password = trim($_POST['Password']);
 
-    //if no error has occured, retrieve user form the databse
+    // Retrieve user details from the database
     if (empty($error)) {
-
-        //retrieve user details from the database
-        if ($query = $conn->prepare("SELECT * FROM patients WHERE `Patient_SSN`=? AND `Status` = 'active'")) {
+        if ($query = $conn->prepare("SELECT * FROM patients WHERE `Patient_SSN` = ? AND `Status` = 'active'")) {
             $query->bind_param('s', $patientSSN);
             $query->execute();
-            $row = $query->get_result()->fetch_assoc();
+            $result = $query->get_result();
+            $row = $result->fetch_assoc();
 
             if ($row) {
-
-                //tests if the entered password matches that in the database
-                if (hash_equals($password, $row['Password'])) {
+                // Check if the entered password matches the hashed password in the database
+                if (password_verify($password, $row['Password'])) {
                     $_SESSION["user"] = "Patient";
                     $_SESSION["userid"] = $row['Patient_SSN'];
                     $_SESSION["username"] = $row['Patient_Name'];
                     $_SESSION["userdata"] = $row;
-            
-                    //close them to prevent further action upon them
+
+                    // Close connections
                     $query->close();
                     $conn->close();
-            
-                    // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: patientView.html");
+
+                    // Redirect to the patient view page
+                    header("Location: patientView.php");
                     exit;
                 } else {
                     $error .= 'The password is not valid.';
                 }
             } else {
-                $error .= 'No user exists with that Patient SSN or Account has been deactivated. Please try again or contact us via DailyPharma.gmail.com';
+                $error .= 'No user exists with that Patient SSN or account has been deactivated. Please try again or contact us via DailyPharma@gmail.com';
             }
+        } else {
+            $error .= 'Database query error.';
         }
     }
 }
 
-// Check if there is an error, and if so, display an alert
+// Display error messages if any
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
     echo "<script>window.location.href = '../patientlogin.html';</script>";
     exit;
 }
-
 
 ?>

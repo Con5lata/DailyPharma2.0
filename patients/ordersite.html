@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../style3.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <title>DailyPharma - Patient Home</title>
+    <title>DailyPharma - Patient Orders</title>
 </head>
 <body class="PatientView">
     <!--Header-->
@@ -33,7 +33,7 @@
                 <a href="#about">Features</a>
                 <a href="#inquiries">Inquiries</a>
                 <a href="#footer">Contact Us</a>
-                <a href="profile.html">Profile</a><!--Place username here-->
+                <a href="../patients/profile.php">Profile</a><!--Place username here-->
                 <a href="cart.html">Cart</a>
                 <a href="login.html">Logout</a>
             </div>
@@ -46,8 +46,8 @@
     </section>
 
     <section id="product1" class="section-p1">
-        <div  class="pro-container" onclick="window.location.href='singleproduct.html'">
-            <div class="pro">
+        <div class="pro-container">
+            <div class="pro"  onclick="window.location.href='singleproduct.html'">
                 <img src="../images/f2.webp" alt="">
                 <div class="des">
                     <h5>CeraVe Foaming Cleanser</h5>
@@ -62,7 +62,7 @@
                 </div>
                 <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
             </div>
-            <div class="pro">
+            <div class="pro"  onclick="window.location.href='singleproduct2.html'">
                 <img src="../images/f1.png" alt="">
                 <div class="des">
                     <h5>12 Vitamin C Tablets</h5>
@@ -348,5 +348,6 @@
 
     <script src="../script.js"></script>
     <script src="../script4.js"></script>
+    <script src="cart.js"></script>
 </body>
 </html>

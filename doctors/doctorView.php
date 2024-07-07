@@ -23,9 +23,9 @@
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 
-                <a href="profile.html">
+                <a href="profile.php">
                     <i class="uil uil-user"></i>Profile
-                </a><!--Place username here-->
+                </a>
         
                 <a href="doctorlogin.html" class="btn-login-popup" >Logout</a>                
     
@@ -41,7 +41,7 @@
                 <a href="doctorView.php">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="profile.html">Profile</a><!--Place username here-->
+                <a href="profile.php">Profile</a><!--Place username here-->
                 <a href="doctorlogin.html">Logout</a>
             </div>
         </div>
