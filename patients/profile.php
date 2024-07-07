@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 
 // Include the database connection file
 include('../connect.php'); // Adjust the path as necessary

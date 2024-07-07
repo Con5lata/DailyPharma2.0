@@ -151,9 +151,9 @@
                         </div>
         
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="drug_name">Drug ID</label>
+                            <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
                             <div class="col-sm-6">
-                                <input type="text" id="drug_name" class="form-control" name="Drug_ID"  required>
+                                <input type="text" id="drug_name" class="form-control" name="Drug_Name"  required>
                             </div>
                         </div>
 

@@ -1,5 +1,81 @@
-<?php include "../inc/view_header.php";?>
+<?php
+//establish a php session
+session_start();
 
+require_once "../connect.php";
+
+// Check if the user is logged in
+if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
+    // Redirect to the login page if the user is not logged in
+    header("Location: patientlogin.html");
+    exit;
+}
+
+// Get the user information from the session variables
+$user = $_SESSION["user"];
+$ID = $_SESSION["userid"];
+$username = $_SESSION["username"];
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../style.css">
+    <title> DailyPharma - Patient Home</title>
+    <style>
+        #inquiries {
+
+    padding: 50px 0; /* Padding to create space around the section */
+    text-align: center; /* Center-align text */
+    justify-content: center;
+}
+#inquiries .form {
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    align-items: center; /* Center the form vertically */
+    padding-left: 100px;
+}
+    </style>
+</head>
+<body class="PatientView">
+
+    <!--Header-->
+    <header>
+        <div class="logo">
+            <a href="../index.html">DailyPharma</a>
+        </div>
+
+        <div class="navbar">
+            <nav class= navbar id="navbar">
+                <a href="../patients/patientView.php">Home</a>
+                <a href="#inquiries">Medical Inquiries</a>
+                <a href="#footer">Contact Us</a>
+                <a href="../patients/profile.php"><i class="fa fa-user" aria-hidden="true"> Profile</i></a>
+                <a href="patientlogin.html" class="btn-login-popup" >Logout</a>                
+                
+                 
+            </nav>
+        </div>
+
+        <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
+
+        <div id="menu" onclick="toggleOverlay()">
+            <div id="menu-content">
+                <a href="../patients/patientView.php">Home</a>
+                <a href="#inquiries">Medical Inquiries</a>
+                <a href="#footer">Contact Us</a>
+                <a href="../patients/profile.php"><i class="fa fa-user" aria-hidden="true"> Profile</i></a>
+                <a href="patientlogin.html">Logout</a> 
+            </div>
+        </div>
+    </header>
 
     <!-- Above fold -->
     <div class="image-container" id="about">
@@ -29,65 +105,24 @@
 
 
     <!-- Drugs -->
-    <div class="item"></div>
-
-    <div class="title-text">
+    <div class="item">
+        <div class="title-text">
             <p>Drugs</p>
             <h1>What are you looking for?</h1>
+        </div>
     </div>
+
 
     <div class="drug_section">
         <div class="sidebar">
             <ul class="category-list">
-              <li class="category-item active" data-category="Order-Drugs">ORDER DRUGS</li>
-              <li class="category-item" data-category="View-Presciptions">VIEW PRESCRIPTIONS</li>
+                <li class="category-item active" data-category="Order-Drugs"><a href="ordersite.html">ORDER DRUGS</a></li>
+              <li class="category-item" data-category="View-Presciptions">VIEW MEDICATION</li>
             </ul>
           </div>
     
-          <div class="main_content">
-            <div class="category-content" id="Order-Drugs">
-
-            <?php 
-            
-            // Fetch drug information along with the prices from the drug_prices and pharmacies tables
-$query = $conn->query("
-SELECT d.Drug_ID, d.Drug_Name, d.Drug_Description, d.Drug_Manufacturing_Date, d.Drug_Expiration_Date, p.Pharmacy_Name, dp.Drug_Price
-FROM drugs d
-INNER JOIN drug_prices dp ON d.Drug_ID = dp.Drug_ID
-INNER JOIN pharmacy p ON dp.Pharmacy_ID = p.Pharmacy_ID
-");
-
-$drugInformation = array();
-while ($row = $query->fetch_assoc()) {
-$drugInformation[] = $row;
-}
-
-            ?>
-
-            <div class="select-container">
-                <label for="availableDrugs">Available Drugs</label>
-                <select name="availableDrugs" id="availableDrugs">
-                    <option value="">Select a drug</option>
-                    <?php foreach ($drugInformation as $drug) : ?>
-                        <option value="<?php echo htmlspecialchars($drug['Drug_ID']); ?>" name="<?php echo htmlspecialchars($drug['Drug_Name']);?>"><?php echo htmlspecialchars($drug['Drug_Name'] . ' - ' . $drug['Pharmacy_Name'] . ' - Price: ' . $drug['Drug_Price']); ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <div id="drugInfo" style="display: none;">
-                <h2>Drug Information</h2>
-                <p id="drugName"></p>
-                <p id="drugPrice"></p>
-                <p id="drugDescription"></p>
-                <p id="drugManufacturingDate"></p>
-                <p id="drugExpirationDate"></p>
-                <p>
-                    <a id="placeOrderBtn" class="btn btn-primary" href="order.php">Place Order</a>
-                </p>
-            </div>
-        </div>
-
-            <div class="category-content" id="View-Presciptions">
+          
+          <div class="category-content" id="View-Presciptions">
                 <div class="container my-5">
                     <h2>Pending Prescription</h2> 
                     <p>Please Pick Up Your Presciptions</p>
@@ -98,7 +133,7 @@ $drugInformation[] = $row;
                                     <th>Prescription ID</th>
                                     <th>Patient SSN</th>
                                     <th>Doctor SSN</th>
-                                    <th>Drug ID</th>
+                                    <th>Medication</th>
                                     <th>Prescription Amount</th>
                                     <th>Prescription Dosage</th>
                                 </tr>
@@ -119,9 +154,9 @@ $drugInformation[] = $row;
                                         echo "<td>" . $row["Prescription_ID"]. "</td>";
                                         echo "<td>" . $row["Patient_SSN"] . "</td>";
                                         echo "<td>" . $row["Doctor_SSN"]. "</td>";
-                                        echo "<td>" . $row["Drug_ID"] . "</td>";
-                                        echo "<td>" . $row["Prescription_Amount"] . "</td>";
-                                        echo "<td>" . $row["Prescription_Dosage"] . "</td>";
+                                        echo "<td>" . $row["Drug_Name"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Amt"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";
                                         echo "</tr>";
                                     }
                                 } else {
@@ -157,7 +192,7 @@ $drugInformation[] = $row;
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Inquiry</label>
                     <div class="col-sm-6">
-                        <textarea class="form-control" name="" id="" cols="30" rows="10" required>
+                        <textarea class="form-control" name="" id="" width=100% required>
                         </textarea>
                     </div>
                 </div>
@@ -188,7 +223,7 @@ $drugInformation[] = $row;
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <div class="col-sm-3 d-grid">
-                        <a class="btn btn-outline-primary" href="#" role="button">Cancel</a>
+                        <a class="btn btn-outline-primary" href="../patients/patientView.html" role="button">Cancel</a>
                     </div>
                 </div>
             </form>
@@ -245,9 +280,9 @@ $drugInformation[] = $row;
                 <div class="quick-links">
                     <h1>Quick Links</h1>
                     <ul>
-                      <li><a href="../index.html">Home</a></li>
-                      <li><a href="../index.html#service">About Us</a></li>
-                      <li><a href="../index.html#feature">Features</a></li>
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="index.html#service">About Us</a></li>
+                      <li><a href="index.html#feature">Features</a></li>
                       <li><a href="#">FAQ</a></li>
                       <li><a href="#">Privacy Policy</a></li>
                       <li><a href="#">Terms and Conditions</a></li>
@@ -261,8 +296,10 @@ $drugInformation[] = $row;
         </div>
     </section>
 
+    
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
-   <script src="../script4.js"></script>
+    <script src="../script4.js"></script>
+    
 </body>
 </html>
