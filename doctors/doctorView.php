@@ -19,7 +19,7 @@
 
         <div class="navbar">
             <nav class= navbar id="navbar">
-                <a href="index.html">Home</a>
+                <a href="doctorView.php">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 
@@ -38,7 +38,7 @@
 
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
-                <a href="index.html">Home</a>
+                <a href="doctorView.php">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->

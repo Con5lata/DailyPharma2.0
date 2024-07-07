@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $conn->close();
             
                     // Redirect to the welcome page if all conditions have been satisfied
-                    header("Location: ../doctors/doctorView.php");
+                    header("Location: doctorView.php");
                     exit;
                 } else {
                     $error .= 'The password is not valid.';
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // Check if there is an error, and if so, display an alert
 if (!empty($error)) {
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = '../login.html';</script>";
+    echo "<script>window.location.href = '../doctorlogin.html';</script>";
     exit;
 }
 

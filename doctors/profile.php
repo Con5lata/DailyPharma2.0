@@ -5,7 +5,7 @@ require_once("connect.php");
 
 $username = $_SESSION["userid"];
 $user = $_SESSION["user"];
-$ID = $_SESSION["user"]["Doctor_SSN"];
+$ID = $_SESSION["Doctor_SSN"];
 
 
 //read the row of the selected client from the database table 
