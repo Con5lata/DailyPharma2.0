@@ -114,63 +114,127 @@ nav a:not(:last-child):hover::after{
   
 #menu-content a:hover {
     color: black;
+}/* Registration form container */
+.wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.btn-login-popup,.btn-logout{
-    width: 130px;
-    height: 50px;
-    background: transparent;
-    border: 2px solid black;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    font-size: 1.2em;
-    text-decoration: none;
-    color: black;
+/* Form title */
+.title-text h1 {
     text-align: center;
-    padding-top: 6px;
-    transition: all .5s ease;
+    color: #007bff;
+    margin-bottom: 1.5rem;
 }
 
-.btn-login-popup:hover , .btn-logout:hover{
-    background-color: white;
-    font-size: 1.2em;
-}
-
-@media screen and (max-width: 900px) {
-    .navbar-toggle {
-      display: block;
-    }
-  
-    .navbar a {
-      display: none;
-    }
-  
-    #menu{
-        display: flex;
-        justify-content: center;
-    }
-
-    .headline p{
-        margin-left: 20px;
-    }
-
-    #menu-content a {
-      display: block;
-    }
-}
-
-@media screen and (max-width: 580px) {
-    .btn-login-popup, .btn-logout{
-        display: none;
-    }
-}
+/* Form styling */
 .form {
     display: flex;
-    justify-content: center; 
-    align-items: center;
-    width: 400px;
-    overflow: hidden; 
-    height: 100vh; 
-    padding-left: 50px;
+    flex-direction: column;
+}
+
+.input-box {
+    margin-bottom: 1rem;
+}
+
+.input-box label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.input-box input,
+.input-box select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.input-box input:focus,
+.input-box select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+}
+
+/* Button styling */
+.registerbtn {
+    background: #007bff;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.registerbtn:hover {
+    background: #0056b3;
+}
+
+.link {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.link a:hover {
+    text-decoration: underline;
+}
+
+/* Cancel button */
+.btn-outline-primary {
+    border-color: #007bff;
+    color: #007bff;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #007bff;
+    color: white;
+}
+
+/* Responsive design for the menu toggle */
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+    
+    .navbar-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+    }
+    
+    #menu {
+        display: block;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: white;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    #menu-content {
+        flex-direction: column;
+    }
 }
