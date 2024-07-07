@@ -691,6 +691,8 @@ hr{
         flex-direction: column;
     }
 }
+
+
 /* Edit Profile*/
 #profile-form h2 {
     /* Your styles here */
@@ -808,16 +810,17 @@ hr{
     width: 400px;
     overflow: hidden; 
     height: 100vh; 
+    padding-left: 50px;
     
 }
 
 .form .login_patient .login_doctor {
     display: block; /* Show patient login form by default */
-    padding-left: 30px;
+    
 }
 .form  .login_doctor {
     display: block; 
-    padding-left: 30px;
+   
 }
 
 .users {

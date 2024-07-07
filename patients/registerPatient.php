@@ -42,22 +42,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         // Prepare and execute the database insert statement
         $query = $conn->prepare("INSERT INTO `patients`(`Patient_SSN`, `Patient_Name`, `Patient_Address`, `Patient_Email`, `Patient_Phone`, `Patient_Gender`, `Patient_DOB`, `Patient_Age`, `Password`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $query->bind_param('isssissss', $patientSSN, $patientName, $patientAddress, $patientEmail, $patientPhone, $patientGender, $patientDOB, $patientAge, $password);
-        if ($query->execute()) {
-            // Registration successful, redirect to login page
-            header("Location: ../login.html");
-            exit;
+        if ($query === false) {
+            // Error occurred while preparing the statement
+            $error = 'Error preparing the SQL statement: ' . $conn->error;
         } else {
-            $error = 'Error registering the user. Please try again later.';
+            $query->bind_param('isssissss', $patientSSN, $patientName, $patientAddress, $patientEmail, $patientPhone, $patientGender, $patientDOB, $patientAge, $password);
+            if ($query->execute()) {
+                // Registration successful, redirect to login page
+                header("Location: patientlogin.html");
+                exit;
+            } else {
+                $error = 'Error executing the SQL statement: ' . $query->error;
+            }
+            $query->close();
         }
-        $query->close();
-    } 
+    }
 }
 
 if(!empty($error)){
     // Display the error message as an alert
     echo "<script>alert('$error');</script>";
-    echo "<script>window.location.href = '../register.php';</script>";
+    echo "<script>window.location.href = 'registerPatient.php';</script>";
     exit;
 }
 
