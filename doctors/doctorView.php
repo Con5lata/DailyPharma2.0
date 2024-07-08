@@ -1,5 +1,5 @@
 <?php
-//establish a php session
+// Establish a PHP session
 session_start();
 
 require_once "../connect.php";
@@ -15,7 +15,6 @@ if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
 $user = $_SESSION["user"];
 $ID = $_SESSION["userid"];
 $username = $_SESSION["username"];
-
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +26,7 @@ $username = $_SESSION["username"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css">
-    <title> DailyPharma - Doctor Home</title>
+    <title>DailyPharma - Doctor Home</title>
 </head>
 <body class="DoctorView">
 
@@ -38,7 +37,7 @@ $username = $_SESSION["username"];
         </div>
 
         <div class="navbar">
-            <nav class= navbar id="navbar">
+            <nav class="navbar" id="navbar">
                 <a href="doctorView.php">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
@@ -47,11 +46,8 @@ $username = $_SESSION["username"];
                     <i class="uil uil-user"></i>Profile
                 </a>
         
-                <a href="doctorlogin.html" class="btn-login-popup" >Logout</a>                
-    
-             
+                <a href="doctorlogin.html" class="btn-login-popup">Logout</a>                
             </nav>
-    
         </div>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
@@ -61,7 +57,7 @@ $username = $_SESSION["username"];
                 <a href="doctorView.php">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="profile.php">Profile</a><!--Place username here-->
+                <a href="profile.php">Profile</a>
                 <a href="doctorlogin.html">Logout</a>
             </div>
         </div>
@@ -69,17 +65,16 @@ $username = $_SESSION["username"];
 
     <!-- Above fold -->
     <div class="image-container" id="about">
-        <div class="Overlay-image">
-        </div>
+        <div class="Overlay-image"></div>
         <div class="content">
             <div class="image-slide">
                 <div class="image-desc active">
                     <h2>Prescribe Medication To Your Patients</h2>
-                    <p> Prescribe and manage the drugs for your patients.</p>
+                    <p>Prescribe and manage the drugs for your patients.</p>
                 </div>
                 <div class="image-desc">
                     <h2>Monitor Patient Wellbeing</h2>
-                    <p>Conveniently observe your patients health.</p>
+                    <p>Conveniently observe your patients' health.</p>
                 </div>
             </div>
             <div class="arrow-buttons">
@@ -89,14 +84,12 @@ $username = $_SESSION["username"];
         </div>
     </div>
 
-
     <!-- Drugs -->
     <div class="item">
         <div class="title-text">
             <p>Features</p>
             <h1>What do you need?</h1>
         </div>
-
     </div>
 
     <div class="drug_section">
@@ -108,18 +101,16 @@ $username = $_SESSION["username"];
         </div>
 
         <div class="main_content">
-
             <div class="category-content" id="Manage-Patients">
                 <div class="container my-5">
                     <h2>List of Patients</h2>
                     <br>
                     <a class="btn btn-primary" href="addpatient.html" role="button">Add New Patient</a>
-                    <br>
-                    <br>
+                    <br><br>
                     <!-- Search Container -->
                     <form action="search_patient.php" method="get">
                         <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
                     </form>
@@ -131,49 +122,84 @@ $username = $_SESSION["username"];
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Gender</th>
                                 <th>AGE</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <tr >
-                                <td>$row[Patient_SSN]</td>                
-                                <td>$row[Patient_Name]</td>
-                                <td>$row[Patient_Email]</td>
-                                <td>$row[Patient_Phone]</td>
-                                <td>$row[Patient_Ages]</td>
-                                <td>
-                                    <a class='btn btn-danger btn-sm' href='patientdelete.php?id=$row[Patient_SSN]'>Delete</a>
-                                </td>
-                            </tr>
+                            <?php
+                            require_once("../connect.php");
+
+                            // Prepare the SQL query
+                            $stmt = $conn->prepare("
+                                SELECT p.Patient_SSN, p.Patient_Name, p.Patient_Email, p.Patient_Phone, p.Patient_Gender, p.Patient_Age
+                                FROM patients p
+                                INNER JOIN doctor_patient dp ON p.Patient_SSN = dp.Patient_SSN
+                                WHERE dp.Doctor_SSN = ? AND p.status = 'active'
+                            ");
+
+                            if ($stmt) {
+                                // Bind the parameter and execute the statement
+                                $stmt->bind_param("s", $ID);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+
+                                // Check if the query returned any rows
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        
+                                    echo "<tr>";
+                                    echo "<td>" . $row["Patient_SSN"] . "</td>";
+                                    echo "<td>" . $row["Patient_Name"] . "</td>";
+                                    echo "<td>" . $row["Patient_Email"] . "</td>";
+                                    echo "<td>" . $row["Patient_Phone"] . "</td>";
+                                    echo "<td>" . $row["Patient_Gender"] . "</td>";
+                                    echo "<td>" . $row["Patient_Age"] . "</td>";
+                                    echo "<td>";
+                                    echo "<a class='btn btn-danger btn-sm' href='confirmDeletePatient.php?id=" . $row["Patient_SSN"] . "'>Delete</a>";
+                                    echo "</td>";
+                                    echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='7'>No patients found.</td></tr>";
+                                }
+
+                                // Close the statement
+                                $stmt->close();
+                            } else {
+                                echo "Error preparing statement: " . $conn->error;
+                            }
+
+                            // Close the connection
+                            $conn->close();
+                            ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-            
 
             <div class="category-content" id="Prescribe-Drugs">
                 <div class="form">
                     <form action="submit_prescription.php" method="post">
-                             
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="patient_ssn">Patient SSN</label>
                             <div class="col-sm-6">
-                                <input type="text" id="patient_ssn"  class="form-control" name= "Patient_SSN" required>
+                                <input type="text" id="patient_ssn" class="form-control" name="Patient_SSN" required>
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="doctor_ssn">Doctor SSN</label>
                             <div class="col-sm-6">
-                                <input type="text" id="doctor_ssn" class="form-control" name="Doctor_SSN"  required>
+                                <input type="text" id="doctor_ssn" class="form-control" name="Doctor_SSN" value="<?php echo htmlspecialchars($ID); ?>" required>
                             </div>
                         </div>
-        
+
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
                             <div class="col-sm-6">
-                                <input type="text" id="drug_name" class="form-control" name="Drug_Name"  required>
+                                <input type="text" id="drug_name" class="form-control" name="Drug_Name" required>
                             </div>
                         </div>
 
@@ -185,13 +211,12 @@ $username = $_SESSION["username"];
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Insructions</label>
+                            <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Instructions</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="prescription_dosage" name="Prescription_Instructions" required>
                             </div>
                         </div>
-        
-        
+
                         <div class="row mb-3">
                             <div class="offset-sm-3 col-sm-3 d-grid">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -201,11 +226,9 @@ $username = $_SESSION["username"];
                 </div>
             </div>
         </div>
-
     </div>
 
-
-    <!--Footer-->
+    <!-- Footer -->
     <section id="footer">
         <div class="title-text">
             <p>CONTACT US</p>
@@ -216,37 +239,30 @@ $username = $_SESSION["username"];
             <div class="footer-left">
                 <h1>Contact information</h1>
                 <div class="contact-link">
-
                     <div class="contact-info">
                         <i class="uil uil-twitter"></i>
                         <span>@DailyPharma</span>
                     </div>
-
                     <div class="contact-info">
                         <i class="uil uil-instagram"></i>
                         <span>@TheDailyPharma</span>
                     </div>
-
                     <div class="contact-info">
                         <i class="uil uil-facebook"></i>
                         <span>@DailyPharma</span>
                     </div>
-
                     <div class="contact-info">
                         <i class="uil uil-linkedin"></i>
                         <span>@DailyPharma - Medical Website</span>
                     </div>
-
                     <div class="contact-info">
                         <i class="uil uil-at"></i>
                         <span>DailyPharma@gmail.com</span>
                     </div>
-
                     <div class="contact-info">
                         <i class="uil uil-calling"></i>
                         <span>0769690000</span>
                     </div>
-
                 </div>
             </div>
 
@@ -254,14 +270,14 @@ $username = $_SESSION["username"];
                 <div class="quick-links">
                     <h1>Quick Links</h1>
                     <ul>
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="#service">About Us</a></li>
-                      <li><a href="#feature">Features</a></li>
-                      <li><a href="#">FAQ</a></li>
-                      <li><a href="#">Privacy Policy</a></li>
-                      <li><a href="#">Terms and Conditions</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#service">About Us</a></li>
+                        <li><a href="#feature">Features</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms and Conditions</a></li>
                     </ul>
-                  </div>
+                </div>
             </div>
         </div>
 
@@ -270,10 +286,8 @@ $username = $_SESSION["username"];
         </div>
     </section>
 
-
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
     <script src="../script4.js"></script>
-    
 </body>
 </html>

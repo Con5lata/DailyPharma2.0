@@ -96,7 +96,25 @@ CREATE TABLE Admin (
     Password VARCHAR(255) NOT NULL,
     Status ENUM('Active', 'Inactive') DEFAULT 'Active'
 );
+-- Create the doctor_patient table
+CREATE TABLE doctor_patient (
+  id INT(10) NOT NULL AUTO_INCREMENT,
+  Doctor_SSN CHAR(11) NOT NULL,
+  Patient_SSN CHAR(11) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (Doctor_SSN) REFERENCES doctors (Doctor_SSN),
+  FOREIGN KEY (Patient_SSN) REFERENCES patients (Patient_SSN)
+);
 
+-- Insert data into the doctor_patient table
+INSERT INTO doctor_patient (Doctor_SSN, Patient_SSN)
+VALUES
+    (24, 12),
+    (24, 13),
+    (24, 25),
+    (35, 66),
+    (46, 98)
+    
 -- Insert data into Patients table
 INSERT INTO Patients (Patient_SSN, Patient_Name, Patient_Email, Patient_Phone, Patient_Address, Password, Patient_DOB, Status)
 VALUES

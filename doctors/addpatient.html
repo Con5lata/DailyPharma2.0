@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,12 +15,12 @@
 <!--Header-->
 <header>
     <div class="logo">
-        <a href="index.html">DailyPharma</a>
+        <a href="../index.html">DailyPharma</a>
     </div>
 
     <div class="navbar">
         <nav class= navbar id="navbar">
-            <a href="index.html">Home</a>
+            <a href="doctorView.php">Home</a>
             <a href="#about">Features</a>
             <a href="#footer">Contact Us</a>
             
@@ -38,7 +39,7 @@
 
     <div id="menu" onclick="toggleOverlay()">
         <div id="menu-content">
-            <a href="index.html">Home</a>
+            <a href=".index.html">Home</a>
             <a href="#about">Features</a>
             <a href="#footer">Contact Us</a>
             <a href="profile.html">Profile</a><!--Place username here-->
@@ -52,7 +53,11 @@
         <h2>Add New Patient</h2>
         <form action="addpatient.php" method="post">
             <div class="form-group">
-                <label for="Patient_SSN">SSN:</label>
+                <label for="Doctor_SSN">Doctor SSN:</label>
+                <input type="text" class="form-control" id="Doctor_SSN" name="Doctor_SSN"  required>
+            </div>
+            <div class="form-group">
+                <label for="Patient_SSN">Patient SSN:</label>
                 <input type="text" class="form-control" id="Patient_SSN" name="Patient_SSN" required>
             </div>
             <div class="form-group">
