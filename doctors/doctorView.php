@@ -33,7 +33,7 @@ $username = $_SESSION["username"];
     <!--Header-->
     <header>
         <div class="logo">
-            <a href="index.html">DailyPharma</a>
+            <a href="../index.html">DailyPharma</a>
         </div>
 
         <div class="navbar">
@@ -124,7 +124,7 @@ $username = $_SESSION["username"];
                                 <th>Phone</th>
                                 <th>Gender</th>
                                 <th>AGE</th>
-                                <th>Actions</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -156,9 +156,7 @@ $username = $_SESSION["username"];
                                     echo "<td>" . $row["Patient_Phone"] . "</td>";
                                     echo "<td>" . $row["Patient_Gender"] . "</td>";
                                     echo "<td>" . $row["Patient_Age"] . "</td>";
-                                    echo "<td>";
-                                    echo "<a class='btn btn-danger btn-sm' href='confirmDeletePatient.php?id=" . $row["Patient_SSN"] . "'>Delete</a>";
-                                    echo "</td>";
+
                                     echo "</tr>";
                                     }
                                 } else {

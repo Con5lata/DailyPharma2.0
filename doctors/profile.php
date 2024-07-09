@@ -1,25 +1,23 @@
-<?php 
-
+<?php
 session_start();
-require_once("connect.php");
+require_once "../connect.php";
 
-// Check if the necessary session variables are set
-if (!isset($_SESSION["Doctor_SSN"])) {
-    header("location: doctorView.php");
+// Check if the user is logged in
+if (!isset($_SESSION["userid"]) || !isset($_SESSION["username"])) {
+    header("Location: doctorlogin.html");
     exit;
 }
 
-// Retrieve the doctor's ID from the session
-$ID = $_SESSION["Doctor_SSN"];
+// Get the user information from the session variables
+$ID = $_SESSION["userid"];
 
-// Prepare and execute SQL query to fetch doctor data
-$sql = $conn->prepare("SELECT * FROM doctors WHERE `Doctor_SSN` = ?");
-$sql->bind_param("s", $ID); // Use "i" if Doctor_SSN is an integer, otherwise use "s" for string
-$sql->execute();
-$row = $sql->get_result()->fetch_assoc();
+$query = $conn->prepare("SELECT * FROM doctors WHERE Doctor_SSN = ?");
+$query->bind_param("i", $ID);
+$query->execute();
+$row = $query->get_result()->fetch_assoc();
 
 if (!$row) {
-    header("location: doctorView.php");
+    echo "User not found.";
     exit;
 }
 
@@ -41,6 +39,22 @@ $exp = $row["Doctor_Experience"];
     <title>User Information</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
+    <style> 
+    body{
+        background: url('images/bg3.jpg')
+    }
+    h2 {
+        padding-top: 100px;
+        padding-bottom: 50px;
+        font-weight: 700;
+        padding-left: 20%;
+
+        } 
+        .bold-text {
+            font-weight: 700;
+        }
+        
+    </style>
 </head>
 <body>
 
@@ -51,10 +65,10 @@ $exp = $row["Doctor_Experience"];
 
     <div class="navbar">
         <nav class="navbar" id="navbar">
-            <a href="../index.html">Home</a>
+            <a href="doctorView.php">Home</a>
             <a href="#about">Features</a>
             <a href="#footer">Contact Us</a>
-            <a href="../logout.php" class="btn-login-popup">Logout</a>                
+            <a href="loginDoctor.php" class="btn-login-popup">Logout</a>                
         </nav>
     </div>
 
@@ -62,16 +76,16 @@ $exp = $row["Doctor_Experience"];
 
     <div id="menu" onclick="toggleOverlay()">
         <div id="menu-content">
-            <a href="../index.html">Home</a>
+        <a href="doctorView.php">Home</a>
             <a href="#about">Features</a>
             <a href="#footer">Contact Us</a>
-            <a href="../logout.php">Logout</a>
+            <a href="loginDoctor.php" class="btn-login-popup">Logout</a> 
         </div>
     </div>
 </header>
 
 <div class="container my-5">
-    <h2>User Information</h2>
+    <h2>Personal Profile</h2>
     <form method="post">
         <div class="row mb-3">
             <label class="col-sm-3 col-form-label">SSN</label>
@@ -102,6 +116,11 @@ $exp = $row["Doctor_Experience"];
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="Doctor_Phone" value="<?php echo htmlspecialchars($phone); ?>" readonly>
             </div>
+        </div>
+
+        <div class="bold-text">
+            <br>
+        If you would like to edit your details, please contact the Administrator via <a href="mailto:DailyPharma@gmail.com">DailyPharma@gmail.com</a>
         </div>
     </form>
 </div>
