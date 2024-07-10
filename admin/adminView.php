@@ -1,3 +1,22 @@
+<?php
+// Establish a PHP session
+session_start();
+
+require_once "../connect.php";
+
+// Check if the user is logged in
+if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
+    // Redirect to the login page if the user is not logged in
+    header("Location: doctorlogin.html");
+    exit;
+}
+
+// Get the user information from the session variables
+$user = $_SESSION["user"];
+$ID = $_SESSION["userid"];
+$username = $_SESSION["username"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,18 +46,18 @@
 <body>
 <header>
     <div class="logo">
-        <a href="index.html">DailyPharma</a>
+        <a href="../index.html">DailyPharma</a>
     </div>
 
     <div class="navbar">
         <nav class="navbar" id="navbar">
-            <a href="index.html">Home</a>
+            <a href="adminView.php">Home</a>
             <a href="#about">Features</a>
             <a href="#footer">Contact Us</a>
-            <a href="profile.html">
+            <a href="profile.php">
                 <i class="uil uil-user"></i>Profile
             </a>
-            <a href="doctorlogin.html" class="btn-login-popup">Logout</a>
+            <a href="loginadmin.html" class="btn-login-popup">Logout</a>
         </nav>
     </div>
 
@@ -46,11 +65,13 @@
 
     <div id="menu" onclick="toggleOverlay()">
         <div id="menu-content">
-            <a href="index.html">Home</a>
+        <a href="adminView.php">Home</a>
             <a href="#about">Features</a>
             <a href="#footer">Contact Us</a>
-            <a href="profile.html">Profile</a>
-            <a href="doctorlogin.html">Logout</a>
+            <a href="profile.php">
+                <i class="uil uil-user"></i>Profile
+            </a>
+            <a href="loginadmin.html">Logout</a>
         </div>
     </div>
 </header>
@@ -62,6 +83,10 @@
             <div class="image-desc active">
                 <h2>Manage Our Users</h2>
                 <p>Manage the users in our system.</p>
+            </div>
+            <div class="image-desc ">
+                <h2>Manage Our Users</h2>
+                <p>Suspend and create accounts </p>
             </div>
             <div class="arrow-buttons">
                 <div class="arrow-left"><i class="uil uil-angle-left-b"></i></div>
@@ -82,7 +107,7 @@
         <ul class="category-list">
             <li class="category-item active" data-category="Patients-List">LIST OF PATIENTS</li>
             <li class="category-item" data-category="Doctors-List">LIST OF DOCTORS</li>
-            <li class="category-item" data-category="Pharmacists-List">LIST OF PHARMACIES</li>
+            <li class="category-item" data-category="Pharmacists-List">LIST OF PHARMACISTS</li>
         </ul>
     </div>
 
@@ -94,12 +119,12 @@
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createPatientModal">Create Account</button>
         <br>
         <!-- Search Container -->
-             <form action="search_patient.php" method="get">
+        <form action="search_patient.php" method="get">
                         <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
-             </form>
+                    </form>
         <br>
         <table class="table">
             <thead>
@@ -160,12 +185,13 @@
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createDoctorModal">Create Account</button>
         <br>
         <!-- Search Container -->
-             <form action="search_patient.php" method="get">
-                        <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </div>
-             </form>
+        <form method="GET" action="search_doctor.php">
+            <div class="search-container">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
+                   
         <br>
         <table class="table">
             <thead>
@@ -224,12 +250,13 @@
         <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createPharmacistModal">Create Account</button>
         <br>
         <!-- Search Container -->
-            <form action="search_patient.php" method="get">
-                        <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </div>
-            </form>
+        <form method="GET" action="search_pharmacist.php">
+            <div class="search-container">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
+        
         <br>
         <table class="table">
             <thead>
@@ -487,7 +514,9 @@
         </div>
     </section>
 
-    <script src="../script1js"></script>
+    <script src="../script.js"></script>
+    <script src="../script1.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const categoryItems = document.querySelectorAll('.category-item');

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            padding-top: 100px;
+            background: url(images/bg3.jpg) no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        h2 {
+            font-weight: 700px;
+            justify-content: center;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html">DailyPharma</a>
+        </div>
+        <div class="navbar">
+            <nav class="navbar" id="navbar">
+                <a href="doctorView.php">Home</a>
+                <a href="#about">Features</a>
+                <a href="#footer">Contact Us</a>
+                <a href="profile.php">
+                    <i class="uil uil-user"></i>Profile
+                </a>
+                <a href="doctorlogin.html" class="btn-login-popup">Logout</a>                
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h2 class="mb-4">Patient Search</h2>
+        <form class="search-form" action="patientSearch.php" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Search by SSN or Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <h2 class="mb-4">Doctor Search</h2>
+        <form class="search-form" action="doctorSearch.php" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Search by License Number or Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <h2 class="mb-4">Pharmacist Search</h2>
+        <form class="search-form" action="pharmacistSearch.php" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Search by License Number or Name">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</body>
+</html>
