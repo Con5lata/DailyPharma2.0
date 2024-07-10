@@ -26,6 +26,26 @@ $username = $_SESSION["username"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css">
+    <style>
+        .card {
+            padding-left: 100px;
+            margin-top: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 700px;
+  
+        }
+        .card-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+        }
+        .form-label {
+            font-weight: 500;
+            justify-content: center;
+        }
+        
+    </style>
     <title>DailyPharma - Doctor Home</title>
 </head>
 <body class="DoctorView">
@@ -178,50 +198,55 @@ $username = $_SESSION["username"];
             </div>
 
             <div class="category-content" id="Prescribe-Drugs">
-                <div class="form">
-                    <form action="submit_prescription.php" method="post">
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="patient_ssn">Patient SSN</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="patient_ssn" class="form-control" name="Patient_SSN" required>
-                            </div>
+            <div class="card">
+            <div class="card-header">
+                Prescription Form
+            </div>
+            <div class="card-body">
+                <form action="submit_prescription.php" method="post">
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="patient_ssn">Patient SSN</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="patient_ssn" class="form-control" name="Patient_SSN" required>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="doctor_ssn">Doctor SSN</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="doctor_ssn" class="form-control" name="Doctor_SSN" value="<?php echo htmlspecialchars($ID); ?>" required>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="doctor_ssn">Doctor SSN</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="doctor_ssn" class="form-control" name="Doctor_SSN" value="<?php echo htmlspecialchars($ID); ?>" required>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
-                            <div class="col-sm-6">
-                                <input type="text" id="drug_name" class="form-control" name="Drug_Name" required>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="drug_name">Drug Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="drug_name" class="form-control" name="Drug_Name" required>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="prescription_amt">Prescription Amount</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="prescription_amt" name="Prescription_Amt" required>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="prescription_amt">Prescription Amount</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="prescription_amt" name="Prescription_Amt" required>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Instructions</label>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="prescription_dosage" name="Prescription_Instructions" required>
-                            </div>
+                    <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="prescription_dosage">Prescription Instructions</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="prescription_dosage" name="Prescription_Instructions" required>
                         </div>
+                    </div>
 
-                        <div class="row mb-3">
-                            <div class="offset-sm-3 col-sm-3 d-grid">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
+                    <div class="row mb-3">
+                        <div class="offset-sm-3 col-sm-9 d-grid">
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
+        </div>  
             </div>
         </div>
     </div>
