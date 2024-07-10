@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO pharmacists (Pharmacist_ID, Pharmacist_Name, Pharmacist_Email, Pharmacist_Phone, Status) VALUES ('$id', '$name', '$email', '$phone', '$status')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New pharmacist created successfully";
+        echo "New Pharmacist Account  created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

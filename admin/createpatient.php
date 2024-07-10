@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO patients (Patient_SSN, Patient_Name, Patient_Email, Patient_Phone, Password, Patient_DOB, Status ) VALUES ('$ssn', '$name', '$email', '$phone','$hashedPassword', '$DOB', '$status'  )";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New patient created successfully";
+        echo "New Patient Account created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

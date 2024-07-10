@@ -102,37 +102,70 @@
             <div class="category-content" id="Manage-Prescriptions">
                 <div class="container my-5">
                     <h2>Pending Prescriptions</h2> 
-                        <form method="GET" action="search_prescription.php">
-                            <div class="search-container">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search by Patient_SSN" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </div>
-                        </form>
+                    <br>
+                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createPatientModal">Prescribe Medication</button>
+                    <br>
 
+                    <form action="search_prescription.php" method="get">
+                        <div class="search-container">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search via the patient name" aria-label="Search" name="search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </form>
                         <br>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>Prescription ID</th>
-                                    <th>Patient SSN</th>
-                                    <th>Doctor SSN</th>
+                                    <th>Patient Name</th>
+                                    <th>Doctor Name</th>
                                     <th>Drug Name</th>
                                     <th>Presciption Amount</th>
                                     <th>Prescription Dosage</th>
+                                    <th>Dispense</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                        <td>
-                                            <a class='btn btn-danger btn-sm' href='#'>Dispense</a>
-                                        </td>
-                                    </tr>
+                            <?php 
+                                // Establish a connection to the database
+                                require_once("../connect.php");
+
+                                // Retrieve prescription data from the database
+                                $sql = $sql = "
+                                SELECT 
+                                    prescriptions.*,
+                                    patients.Patient_Name AS Patient_Name,
+                                    doctors.Doctor_Name AS Doctor_Name
+                                FROM 
+                                    prescriptions
+                                JOIN 
+                                    patients ON prescriptions.Patient_SSN = patients.Patient_SSN
+                                JOIN 
+                                    doctors ON prescriptions.Doctor_SSN = doctors.Doctor_SSN
+                                WHERE 
+                                    prescriptions.Prescribed = 'N';
+                            ";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "</tr>";
+                                        echo "<tr>";                                         
+                                        echo "<td>" . $row["Prescription_ID"]. "</td>";
+                                        echo "<td>" . $row["Patient_Name"] . "</td>";
+                                        echo "<td>" . $row["Doctor_Name"]. "</td>";
+                                        echo "<td>" . $row["Drug_Name"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Amt"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";
+                                        echo "<td>";
+                                        echo    "<a class='btn btn-danger btn-sm' href='dispenseDrug.php?ID=" . $row["Prescription_ID"] ."'>Dispense</a>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
 
@@ -144,9 +177,9 @@
             <div class="category-content" id="Prescription-History">
                 <div class="container my-5">
                     <h2>PRESCRIPTION HISTORY</h2> 
-                    <form method="GET" action="search_prescription.php">
+                    <form action="search_prescription.php" method="get">
                         <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search by Patient_SSN" aria-label="Search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search via the patient name" aria-label="Search" name="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
                     </form>
@@ -164,14 +197,44 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                    <tr>               
-                                        <td>$row["Prescription_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Doctor_SSN"]</td>
-                                        <td>$row["Drug_Name"]</td>
-                                        <td>$row["Prescription_Amt"]</td>
-                                        <td>$row["Prescription_Dosage"]</td>
-                                    </tr>
+                            <?php 
+                                // Establish a connection to the database
+                                require_once("../connect.php");
+
+                                // Retrieve prescription data from the database
+                                $sql = $sql = "
+                                SELECT 
+                                    prescriptions.*,
+                                    patients.Patient_Name AS Patient_Name,
+                                    doctors.Doctor_Name AS Doctor_Name
+                                FROM 
+                                    prescriptions
+                                JOIN 
+                                    patients ON prescriptions.Patient_SSN = patients.Patient_SSN
+                                JOIN 
+                                    doctors ON prescriptions.Doctor_SSN = doctors.Doctor_SSN
+                                WHERE 
+                                    prescriptions.Prescribed = 'Y';
+                            ";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "</tr>";
+                                        echo "<tr>";                                         
+                                        echo "<td>" . $row["Prescription_ID"]. "</td>";
+                                        echo "<td>" . $row["Patient_Name"] . "</td>";
+                                        echo "<td>" . $row["Doctor_Name"]. "</td>";
+                                        echo "<td>" . $row["Drug_Name"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Amt"] . "</td>";
+                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";
+    
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                }
+                                ?>
                             </tbody>
                         </table>
                 </div>
@@ -204,6 +267,53 @@
             </div>
         </div>
     </div>
+    <!-- Prescription Modal -->
+<div class="modal fade" id="createPatientModal" tabindex="-1" aria-labelledby="createPatientModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="prescribe.php" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createPatientModalLabel"> Prescribe Medication</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="patient_ssn" class="form-label">SSN</label>
+                        <input type="text" class="form-control" id="patient_ssn" name="Patient_SSN" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="patient_name" name="Patient_Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="patient_email" name="Patient_Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient_phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="patient_phone" name="Patient_Phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient_dob" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="patient_dob" name="Patient_DOB" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient_status" class="form-label">Status</label>
+                        <select class="form-control" id="patient_status" name="Status" required>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
     <!--Footer-->

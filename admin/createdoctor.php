@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO doctors (Doctor_SSN, Doctor_Name, Doctor_Phone, Doctor_Speciality, Doctor_Experience, Status) VALUES ('$ssn', '$name', '$phone', '$speciality', '$experience', '$status')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New doctor created successfully";
+        echo "New Account octor created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
