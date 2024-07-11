@@ -116,6 +116,7 @@
                         echo "<td>" . htmlspecialchars($row['Prescription_ID']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Patient_Name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Doctor_Name']) . "</td>";
+                        echo "<td>" . (!empty($row["Prescribed_By"]) ? $row["Prescribed_By"] : 'N/A') . "</td>";
                         echo "<td>" . htmlspecialchars($row['Drug_Name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Prescription_Amt']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Prescription_Instructions']) . "</td>";

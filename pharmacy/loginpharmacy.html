@@ -1,4 +1,4 @@
--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../style.css">
     <style>.input-box label { padding-left: 40px;}</style>
-    <title> Pharmacist Login Page</title>
+    <title>Pharmacist Login Page</title>
 </head>
 <body class="Login">
 
@@ -17,54 +17,45 @@
             <a href="../index.html">DailyPharma</a>
         </div>
 
-        <nav class= navbar id="navbar">
+        <nav class="navbar" id="navbar">
             <a href="pharmacyView.php">Home</a>
             <a href="../index.html#service">About Us</a>
             <a href="../index.html#feature">Features</a>
             <a href="../index.html#testimonials">Testimonials</a>
             <a href="../index.html#footer">Contact Us</a>
-            <a href="loginpharmacy.html" class="btn-login-popup" >Login</a>
+            <a href="loginpharmacy.html" class="btn-login-popup">Login</a>
         </nav>
 
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
 
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
-            <a href="pharmacyView.php">Home</a>
-            <a href="../index.html#service">About Us</a>
-            <a href="../index.html#feature">Features</a>
-            <a href="../index.html#testimonials">Testimonials</a>
-            <a href="../index.html#footer">Contact Us</a>
-            <a href="loginpharmacy.html">Login</a>
+                <a href="pharmacyView.php">Home</a>
+                <a href="../index.html#service">About Us</a>
+                <a href="../index.html#feature">Features</a>
+                <a href="../index.html#testimonials">Testimonials</a>
+                <a href="../index.html#footer">Contact Us</a>
+                <a href="loginpharmacy.html">Login</a>
             </div>
         </div>
     </header>
 
-
     <!--Dynamic Login Form-->
     <div class="wrapper">
-
         <div class="title-text">
             <h1>Login</h1>
         </div>
-        
-        <div class="users">
-            <button class="patient">Patient</button>
-            
-        </div>
 
         <div class="form">
-           
-            <form action="loginPharmacy.php" class="login_pharmacy method="post">
-
+            <form action="loginpharmacy.php" method="post" class="login_pharmacy">
                 <div class="input-box">
-                <label>Pharmacist ID</label>
-                <input type="text" name="Pharmacy_ID:" required>
+                    <label for="pharmacistID">Pharmacist ID</label>
+                    <input type="text" name="Pharmacist_ID" required>
                 </div>
 
                 <div class="input-box">
-                <label>Password</label>
-                <input type="password" name="Password" required>
+                    <label for="password">Password</label>
+                    <input type="password" name="Password" required>
                 </div>
 
                 <div class="forgot">
@@ -73,10 +64,7 @@
 
                 <button class="loginbtn" type="submit">Login</button>
             </form>
-
-            
         </div>
-
     </div>
     <script src="../script.js"></script>
     

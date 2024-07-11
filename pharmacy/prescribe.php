@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
     
     // Redirect after a delay to ensure the message is visible
-    header("Refresh: 2; URL=pharmacyView.php");
+    header("Refresh: 1; URL=pharmacyView.php");
     exit();
 }
 ?>

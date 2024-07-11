@@ -1,3 +1,22 @@
+<?php
+// Establish a PHP session
+session_start();
+
+require_once "../connect.php";
+
+// Check if the user is logged in
+if (!isset($_SESSION["userid"]) || !isset($_SESSION["user"])) {
+    // Redirect to the login page if the user is not logged in
+    header("Location: loginpharmacy.html");
+    exit;
+}
+
+// Get the user information from the session variables
+$user = $_SESSION["user"];
+$ID = $_SESSION["userid"];
+$username = $_SESSION["username"];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,26 +33,22 @@
     <!--Header-->
     <header>
         <div class="logo">
-            <a href="index.html">DailyPharma</a>
+            <a href="../index.html">DailyPharma</a>
         </div>
 
         <div class="navbar">
             <nav class= navbar id="navbar">
-                <a href="index.html">Home</a>
+                <a href="pharmacyView.php">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
-                <a href="login.html" class="btn-login-popup" >Logout</a>                
+                <a href="profile.php">
+                    <i class="uil uil-user"></i>Profile
+                </a><!--Place username here-->
+                <a href="loginpharmacy.html" class="btn-login-popup" >Logout</a>                
                 </nav>
                 </nav>
     
             </nav>
-    
-            <div class="profile" >
-                <a href="profile.html">
-                    <i class="uil uil-user"></i>Profile
-                </a><!--Place username here-->
-            </div>
-
 
         </div>
 
@@ -41,11 +56,11 @@
 
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
-                <a href="index.html">Home</a>
+                <a href="pharmacyView.phpl">Home</a>
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="login.html">Logout</a>
+                <a href="loginpharmacy.php">Logout</a>
             </div>
         </div>
     </header>
@@ -116,6 +131,7 @@
                                     <th>Prescription ID</th>
                                     <th>Patient Name</th>
                                     <th>Doctor Name</th>
+                                    <th>Prescribed By</th>
                                     <th>Drug Name</th>
                                     <th>Presciption Amount</th>
                                     <th>Prescription Dosage</th>
@@ -160,7 +176,7 @@
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='7'>No prescriptions found.</td></tr>";
+                                    echo "<tr><td colspan='8'>No prescriptions found.</td></tr>";
                                 }
                                 ?>
                             </tbody>
