@@ -57,7 +57,7 @@ $username = $_SESSION["username"];
             <a href="profile.php">
                 <i class="uil uil-user"></i>Profile
             </a>
-            <a href="loginadmin.html" class="btn-login-popup">Logout</a>
+            <a href="loginadmin.html" id="logoutButton" class="btn-login-popup">Logout</a>
         </nav>
     </div>
 
@@ -71,7 +71,7 @@ $username = $_SESSION["username"];
             <a href="profile.php">
                 <i class="uil uil-user"></i>Profile
             </a>
-            <a href="loginadmin.html">Logout</a>
+            <a href="loginadmin.html" id="logoutButton">Logout</a>
         </div>
     </div>
 </header>
@@ -516,6 +516,7 @@ $username = $_SESSION["username"];
 
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
+    <script src="../logout.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {

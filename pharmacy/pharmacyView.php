@@ -44,7 +44,7 @@ $username = $_SESSION["username"];
                 <a href="profile.php">
                     <i class="uil uil-user"></i>Profile
                 </a><!--Place username here-->
-                <a href="loginpharmacy.html" class="btn-login-popup" >Logout</a>                
+                <a href="loginpharmacy.html" id="logoutButton" class="btn-login-popup" >Logout</a>                
                 </nav>
                 </nav>
     
@@ -60,7 +60,7 @@ $username = $_SESSION["username"];
                 <a href="#about">Features</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.html">Profile</a><!--Place username here-->
-                <a href="loginpharmacy.php">Logout</a>
+                <a href="loginpharmacy.php" id="logoutButton">Logout</a>
             </div>
         </div>
     </header>
@@ -496,6 +496,7 @@ $username = $_SESSION["username"];
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
     <script src="../script4.js"></script>
+    <script src="../logout.js"></script>
     
 </body>
 </html>
