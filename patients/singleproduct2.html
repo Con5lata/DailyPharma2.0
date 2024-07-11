@@ -19,7 +19,7 @@
         </div>
         <div class="navbar">
             <nav class="navbar" id="navbar">
-                <a href="patientView.php">Home</a>
+                <a href="ordersite.html">Home</a>
                 <a href="#inquiries">Medical Inquiries</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.php"><i class="fa fa-user" aria-hidden="true"></i></a>
@@ -30,7 +30,7 @@
         <i class="uil uil-bars navbar-toggle" onclick="toggleOverlay()"></i>
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
-                <a href="patientView.php">Home</a>
+                <a href="ordersite.html">Home</a>
                 <a href="#inquiries">Medical Inquiries</a>
                 <a href="#footer">Contact Us</a>
                 <a href="profile.php"><i class="fa fa-user" aria-hidden="true"> Profile</i></a>
@@ -70,7 +70,7 @@
             <h4>Vitamin C tablets</h4>
             <h2>Ksh 508</h2>
             <input type="number" value="1" min="1" id="quantity">
-            <button class="number">Add To Cart</button>
+            <button class="number" onclick="addToCart()">Add To Cart</button>
             <h4>Product Description</h4>
             <span>
                 Each effervescent tablet contains: Vitamin C* (Absorbic Acid)…1000mg, effervescent excipients…q.s. Approved colour and flavour added.
@@ -157,6 +157,12 @@
             <p>&copy; 2024 DailyPharma. All rights reserved.</p>
         </div>
     </section>
+    <script>
+        function addToCart() {
+            alert('Item added to cart');
+        }
+    </script>
+    
     <script src="../script.js"></script>
     <script src="../script4.js"></script>
     <script src="../script5.js"></script>
