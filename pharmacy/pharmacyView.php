@@ -107,6 +107,8 @@ $username = $_SESSION["username"];
             <ul class="category-list">
                 <li class="category-item" data-category="Manage-Prescriptions">PENDING PRESCRIPTIONS</li>
                 <li class="category-item" data-category="Prescription-History">PRESCRIPTION HISTORY </li>
+                <li class="category-item" data-category="Uploaded-Prescriptions">UPLOADED PRESCRIPTIONS</li>
+                <li class="category-item" data-category="Inquiries">INQUIRIES</li>
                 <li class="category-item" data-category="Online-Orders">ONLINE ORDERS</li>
 
             </ul>
@@ -252,6 +254,93 @@ $username = $_SESSION["username"];
                         </table>
                 </div>
             </div>
+            <!-- Main Content -->
+            <div class="category-content" id="Uploaded-Prescriptions">
+                <div class="container my-5">
+                    <h2>Uploaded Prescriptions</h2>
+                 <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Document ID</th>
+                                <th>Patient Name</th>
+                                <th>Doctor Name</th>
+                                <th>Document Type</th>
+                                <th>Upload Date</th>
+                                 <th>Actions</th>
+                            </tr>
+                        </th>
+                        <tbody>
+                            <?php 
+                                // Retrieve uploaded files data from the database
+                                $sql = "SELECT * FROM prescription_documents";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";                                        
+                                        echo "<td>" . $row["id"]. "</td>";
+                                        echo "<td>" . $row["patient_name"] . "</td>";
+                                        echo "<td>" . $row["patient_ssn"]. "</td>";
+                                        echo "<td>" . $row["file_path"] . "</td>";
+                                        echo "<td>" . $row["created_at"] . "</td>";
+                                        // Construct the full file path
+                                        $fullFilePath = "../patients/uploads/" . $row["file_path"];
+                                        echo "<td>";
+                                        echo    "<a class='btn btn-info btn-sm' href='" . $fullFilePath . "' target='_blank'>View</a>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='6'>No documents found.</td></tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Inquiries Section -->
+            <div class="category-content" id="Inquiries">
+                <div class="container my-5">
+                    <h2>Inquiries</h2>
+                    
+                    <br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Inquiry ID</th>
+                                <th>Patient Name</th>
+                                <th>Email</th>
+                                <th>Inquiry Details</th>
+                                <th>Respond</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                // Retrieve inquiry data from the database
+                                $sql = "SELECT * FROM inquiry";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<tr>";                                        
+                                        echo "<td>" . $row["Inquiry_No"]. "</td>";
+                                        echo "<td>" . $row["Patient_Name"] . "</td>";
+                                        echo "<td>" . $row["Email"] . "</td>";
+                                        echo "<td>" . $row["Inquiry"] . "</td>";
+                                        echo "<td>";
+                                        echo    "<a class='btn btn-primary btn-sm' href='respond_inquiry.php?ID=" . $row["Inquiry_No"] ."'>Respond</a>";
+                                        echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr><td colspan='4'>No inquiries found.</td></tr>";
+                                }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>      
 
             <div class="category-content" id="Online-Orders">
                 <div class="container my-5">

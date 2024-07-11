@@ -112,7 +112,7 @@ $password = $row["Password"];
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Speciality</label>
+            <label class="col-sm-3 col-form-label">Password</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" name="Password" value="<?php echo htmlspecialchars($password); ?>" readonly>
             </div>

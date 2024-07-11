@@ -25,21 +25,9 @@ $ID = $_SESSION['userid'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href="../style.css">
     <title>DailyPharma - Patient Home</title>
-    <style>
-        #inquiries {
-            padding: 50px 0;
-            text-align: center;
-            justify-content: center;
-        }
-        #inquiries .form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-left: 100px;
-        }
-    </style>
 </head>
 <body class="PatientView">
 
@@ -52,10 +40,12 @@ $ID = $_SESSION['userid'];
         <div class="navbar">
             <nav class="navbar" id="navbar">
                 <a href="../patients/patientView.php">Home</a>
-                <a href="#inquiries">Medical Inquiries</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#inquiryModal">Inquiry?</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#uploadPrescriptionModal">Upload Prescription</a>
                 <a href="#footer">Contact Us</a>
                 <a href="../patients/profile.php"><i class="fa fa-user" aria-hidden="true"> Profile</i></a>
-                <a href="../patients/patientlogin.html" class="btn-login-popup">Logout</a>
+                <a href="../patients/patientlogin.html" id="logoutButton" class="btn-login-popup">Logout</a>
+
             </nav>
         </div>
 
@@ -64,7 +54,8 @@ $ID = $_SESSION['userid'];
         <div id="menu" onclick="toggleOverlay()">
             <div id="menu-content">
                 <a href="../patients/patientView.php">Home</a>
-                <a href="#inquiries">Medical Inquiries</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#inquiryModal">Inquiry?</a>
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#uploadPrescriptionModal">Upload Prescription</a>
                 <a href="#footer">Contact Us</a>
                 <a href="../patients/profile.php"><i class="fa fa-user" aria-hidden="true"> Profile</i></a>
                 <a href="../patients/patientlogin.html">Logout</a>
@@ -159,55 +150,74 @@ $ID = $_SESSION['userid'];
         </div>
     </div>
 
-    <!-- Inquiries Section -->
-    <section id="inquiries" class="med">
-        <div class="title-text">
-            <p>Inquiries</p>
-            <h1>Do you have a medical question?</h1>
-        </div>
-        <div class="form">
-            <form method="post">
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Patient SSN</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="patient_ssn" value="" required>
+    <!-- Modal Structure for the Inquiry-->
+<div class="modal fade" id="inquiryModal" tabindex="-1" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inquiryModalLabel">Medical Inquiry</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="inquiryForm" method="post" action="submit_inquiry.php">
+                    <div class="mb-3">
+                        <label for="patient_ssn" class="form-label">Patient SSN</label>
+                        <input type="text" class="form-control" id="patient_ssn" name="Patient_SSN" required>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Inquiry</label>
-                    <div class="col-sm-6">
-                        <textarea class="form-control" name="inquiry" width="100%" required></textarea>
+                    <div class="mb-3">
+                        <label for="patient_name" class="form-label">Patient Name</label>
+                        <input type="text" class="form-control" id="patient_name" name="Patient_Name" required>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-6">
-                        <input type="email" class="form-control" name="email" value="" required>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="Email" required>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Doctor</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="doctor" value="">
+                    <div class="mb-3">
+                        <label for="inquiry" class="form-label">Inquiry</label>
+                        <textarea class="form-control" id="inquiry" name="Inquiry" rows="4" required></textarea>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-3 col-form-label">Pharmacy</label>
-                    <div class="col-sm-6">
-                        <input type="text" class="form-control" name="pharmacy" value="">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="offset-sm-3 col-sm-3 d-grid">
+                    <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                     </div>
-                    <div class="col-sm-3 d-grid">
-                        <a class="btn btn-outline-primary" href="../patients/patientView.html" role="button">Cancel</a>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+</div>
+
+<!-- Modal Structure for Uploading Prescription -->
+<div class="modal fade" id="uploadPrescriptionModal" tabindex="-1" aria-labelledby="uploadPrescriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadPrescriptionModalLabel">Upload Prescription</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadPrescriptionForm" method="post" action="upload_prescription.php" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="patient_name" class="form-label">Patient Name</label>
+                        <input type="text" class="form-control" id="patient_name" name="Patient_Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="patient_ssn" class="form-label">Patient SSN</label>
+                        <input type="text" class="form-control" id="patient_ssn" name="Patient_SSN" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prescription_file" class="form-label">Prescription Document</label>
+                        <input type="file" class="form-control" id="prescription_file" name="Prescription_File" accept=".pdf,.jpg,.jpeg,.png" required>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- Footer -->
     <section id="footer">
@@ -264,6 +274,7 @@ $ID = $_SESSION['userid'];
         </div>
     </section>
 
+    <script src="../logout.js"></script>    
     <script src="../script.js"></script>
     <script src="../script1.js"></script>
     <script src="../script4.js"></script>
