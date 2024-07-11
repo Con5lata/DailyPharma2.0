@@ -102,13 +102,10 @@
             <div class="category-content" id="Manage-Prescriptions">
                 <div class="container my-5">
                     <h2>Pending Prescriptions</h2> 
-                    <br>
-                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createPatientModal">Prescribe Medication</button>
-                    <br>
-
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prescribeMedicationModal"> Prescribe Medication </button>
                     <form action="search_prescription.php" method="get">
                         <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search via the patient name" aria-label="Search" name="search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search by patient name" aria-label="Search" name="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
                     </form>
@@ -149,27 +146,26 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "</tr>";
-                                        echo "<tr>";                                         
+                                        echo "<tr>";                                        
                                         echo "<td>" . $row["Prescription_ID"]. "</td>";
                                         echo "<td>" . $row["Patient_Name"] . "</td>";
                                         echo "<td>" . $row["Doctor_Name"]. "</td>";
+                                        echo "<td>" . (!empty($row["Prescribed_By"]) ? $row["Prescribed_By"] : 'N/A') . "</td>";
                                         echo "<td>" . $row["Drug_Name"] . "</td>";
                                         echo "<td>" . $row["Prescription_Amt"] . "</td>";
-                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";
-                                        echo "<td>";
+                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";echo "<td>";
                                         echo    "<a class='btn btn-danger btn-sm' href='dispenseDrug.php?ID=" . $row["Prescription_ID"] ."'>Dispense</a>";
                                         echo "</td>";
+  
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                    echo "<tr><td colspan='7'>No prescriptions found.</td></tr>";
                                 }
                                 ?>
                             </tbody>
                         </table>
 
-  
                         
                 </div>
             </div>
@@ -179,7 +175,7 @@
                     <h2>PRESCRIPTION HISTORY</h2> 
                     <form action="search_prescription.php" method="get">
                         <div class="search-container">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search via the patient name" aria-label="Search" name="search">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search By patient name" aria-label="Search" name="search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </div>
                     </form>
@@ -191,6 +187,7 @@
                                     <th>Prescription ID</th>
                                     <th>Patient SSN</th>
                                     <th>Doctor SSN</th>
+                                    <th>Prescribed By</th>
                                     <th>Drug Name</th>
                                     <th>Prescription Amount</th>
                                     <th>Prescription Dosage</th>
@@ -220,20 +217,20 @@
 
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
-                                        echo "</tr>";
-                                        echo "<tr>";                                         
+                                        echo "<tr>";                                        
                                         echo "<td>" . $row["Prescription_ID"]. "</td>";
                                         echo "<td>" . $row["Patient_Name"] . "</td>";
                                         echo "<td>" . $row["Doctor_Name"]. "</td>";
+                                        echo "<td>" . (!empty($row["Prescribed_By"]) ? $row["Prescribed_By"] : 'N/A') . "</td>";
                                         echo "<td>" . $row["Drug_Name"] . "</td>";
                                         echo "<td>" . $row["Prescription_Amt"] . "</td>";
                                         echo "<td>" . $row["Prescription_Instructions"] . "</td>";
-    
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='6'>No prescriptions found.</td></tr>";
+                                    echo "<tr><td colspan='7'>No prescriptions found.</td></tr>";
                                 }
+                                
                                 ?>
                             </tbody>
                         </table>
@@ -268,51 +265,60 @@
         </div>
     </div>
     <!-- Prescription Modal -->
-<div class="modal fade" id="createPatientModal" tabindex="-1" aria-labelledby="createPatientModalLabel" aria-hidden="true">
+    <div class="modal fade" id="prescribeMedicationModal" tabindex="-1" aria-labelledby="prescribeMedicationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="prescribe.php" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createPatientModalLabel"> Prescribe Medication</h5>
+                    <h5 class="modal-title" id="prescribeMedicationModalLabel">Prescribe Medication</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="patient_ssn" class="form-label">SSN</label>
+                        <label for="patient_ssn" class="form-label">Patient SSN</label>
                         <input type="text" class="form-control" id="patient_ssn" name="Patient_SSN" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="patient_name" class="form-label">Name</label>
+                        <label for="patient_name" class="form-label">Patient Name</label>
                         <input type="text" class="form-control" id="patient_name" name="Patient_Name" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="patient_email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="patient_email" name="Patient_Email" required>
+                        <label for="prescribed_by" class="form-label">Prescribed By</label>
+                        <input type="text" class="form-control" id="prescribed_by" name="Prescribed_By" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="patient_phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="patient_phone" name="Patient_Phone" required>
+                        <label for="drug_name" class="form-label">Drug Name</label>
+                        <input type="text" class="form-control" id="drug_name" name="Drug_Name" required>
                     </div>
+
                     <div class="mb-3">
-                        <label for="patient_dob" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" id="patient_dob" name="Patient_DOB" required>
+                        <label for="prescription_amt" class="form-label">Prescription Amount</label>
+                        <input type="text" class="form-control" id="prescription_amt" name="Prescription_Amt" required>
                     </div>
+                    
                     <div class="mb-3">
-                        <label for="patient_status" class="form-label">Status</label>
-                        <select class="form-control" id="patient_status" name="Status" required>
-                            <option value="Active">Active</option>
-                            <option value="Inactive">Inactive</option>
-                        </select>
+                        <label for="prescription_instructions" class="form-label">Prescription Instructions</label>
+                        <textarea class="form-control" id="prescription_instructions" name="Prescription_Instructions" rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Create Account</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Prescribe</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Bootstrap JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 
 
 

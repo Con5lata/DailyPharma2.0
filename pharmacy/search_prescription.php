@@ -56,6 +56,7 @@
                     <th>Prescription ID</th>
                     <th>Patient Name</th>
                     <th>Doctor Name</th>
+                    <th>Prescrbed By</th>
                     <th>Medication</th>
                     <th>Dosage</th>
                     <th>Instructions</th>

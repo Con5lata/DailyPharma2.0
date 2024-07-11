@@ -3,29 +3,37 @@ require_once("../connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $patient_ssn = $_POST['Patient_SSN'];
-    $doctor_ssn = $_POST['Doctor_SSN'];
-    $medication = $_POST['Medication'];
-    $dosage = $_POST['Dosage'];
-    $prescribed_date = $_POST['Prescribed_Date'];
-    $notes = $_POST['Notes'];
-    $status = $_POST['Prescribed'];  // Assuming 'Prescribed' is the status of the prescription (Y/N)
+    $prescribed_by = $_POST['Prescribed_By'];
+    $drug_name = $_POST['Drug_Name'];
+    $amt = $_POST['Prescription_Amt'];
+    $prescription_inst = $_POST['Prescription_Instructions'];
 
     // Validate the input data if needed
 
-    $sql = "INSERT INTO prescriptions (Patient_SSN, Doctor_SSN, Medication, Dosage, Prescribed_Date, Notes, Prescribed) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    // Prepare the SQL statement for inserting into the prescriptions table
+    $sql = "INSERT INTO prescriptions (Patient_SSN, Prescribed_By, Drug_Name, Prescription_Amt, Prescription_Instructions) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssssss", $patient_ssn, $doctor_ssn, $medication, $dosage, $prescribed_date, $notes, $status);
+    
+    if ($stmt === false) {
+        die("Prepare failed: " . $conn->error);
+    }
 
-    if ($stmt->execute() === TRUE) {
+    // Bind the parameters
+    $stmt->bind_param("sssss", $patient_ssn, $prescribed_by, $drug_name, $amt, $prescription_inst);
+
+    // Execute the statement
+    if ($stmt->execute()) {
         echo "New prescription created successfully";
     } else {
         echo "Error: " . $stmt->error;
     }
 
+    // Close the statement and connection
     $stmt->close();
     $conn->close();
-    header("Location: doctorView.php");
+    
+    // Redirect after a delay to ensure the message is visible
+    header("Refresh: 2; URL=pharmacyView.php");
     exit();
 }
 ?>
