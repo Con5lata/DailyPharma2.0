@@ -146,7 +146,7 @@ $username = $_SESSION["username"];
                                 require_once("../connect.php");
 
                                 // Retrieve prescription data from the database
-                                $sql = $sql = "
+                                $sql = "
                                 SELECT 
                                     prescriptions.*,
                                     patients.Patient_Name AS Patient_Name,
@@ -155,11 +155,11 @@ $username = $_SESSION["username"];
                                     prescriptions
                                 JOIN 
                                     patients ON prescriptions.Patient_SSN = patients.Patient_SSN
-                                JOIN 
-                                    doctors ON prescriptions.Doctor_SSN = doctors.Doctor_SSN
+                                LEFT JOIN 
+                                    doctors ON prescriptions.Prescribed_By = doctors.Doctor_SSN
                                 WHERE 
                                     prescriptions.Prescribed = 'N';
-                            ";
+                                ";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -167,20 +167,20 @@ $username = $_SESSION["username"];
                                         echo "<tr>";                                        
                                         echo "<td>" . $row["Prescription_ID"]. "</td>";
                                         echo "<td>" . $row["Patient_Name"] . "</td>";
-                                        echo "<td>" . $row["Doctor_Name"]. "</td>";
+                                        echo "<td>" . (!empty($row["Doctor_SSN"]) ? $row["Doctor_SSN"] : 'N/A') . "</td>";
                                         echo "<td>" . (!empty($row["Prescribed_By"]) ? $row["Prescribed_By"] : 'N/A') . "</td>";
                                         echo "<td>" . $row["Drug_Name"] . "</td>";
                                         echo "<td>" . $row["Prescription_Amt"] . "</td>";
-                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";echo "<td>";
+                                        echo "<td>" . $row["Prescription_Instructions"] . "</td>";
+                                        echo "<td>";
                                         echo    "<a class='btn btn-danger btn-sm' href='dispenseDrug.php?ID=" . $row["Prescription_ID"] ."'>Dispense</a>";
                                         echo "</td>";
-  
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='8'>No prescriptions found.</td></tr>";
+                                     echo "<tr><td colspan='8'>No prescriptions found.</td></tr>";
                                 }
-                                ?>
+                            ?>                            
                             </tbody>
                         </table>
 
@@ -217,7 +217,7 @@ $username = $_SESSION["username"];
                                 require_once("../connect.php");
 
                                 // Retrieve prescription data from the database
-                                $sql = $sql = "
+                                $sql = "
                                 SELECT 
                                     prescriptions.*,
                                     patients.Patient_Name AS Patient_Name,
@@ -226,11 +226,11 @@ $username = $_SESSION["username"];
                                     prescriptions
                                 JOIN 
                                     patients ON prescriptions.Patient_SSN = patients.Patient_SSN
-                                JOIN 
-                                    doctors ON prescriptions.Doctor_SSN = doctors.Doctor_SSN
+                                LEFT JOIN 
+                                    doctors ON prescriptions.Prescribed_By = doctors.Doctor_SSN
                                 WHERE 
                                     prescriptions.Prescribed = 'Y';
-                            ";
+                                ";
                                 $result = $conn->query($sql);
 
                                 if ($result->num_rows > 0) {
@@ -238,7 +238,7 @@ $username = $_SESSION["username"];
                                         echo "<tr>";                                        
                                         echo "<td>" . $row["Prescription_ID"]. "</td>";
                                         echo "<td>" . $row["Patient_Name"] . "</td>";
-                                        echo "<td>" . $row["Doctor_Name"]. "</td>";
+                                        echo "<td>" . $row["Doctor_SSN"] . "</td>";
                                         echo "<td>" . (!empty($row["Prescribed_By"]) ? $row["Prescribed_By"] : 'N/A') . "</td>";
                                         echo "<td>" . $row["Drug_Name"] . "</td>";
                                         echo "<td>" . $row["Prescription_Amt"] . "</td>";
@@ -246,11 +246,10 @@ $username = $_SESSION["username"];
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='7'>No prescriptions found.</td></tr>";
+                                     echo "<tr><td colspan='8'>No prescriptions found.</td></tr>";
                                 }
-                                
-                                ?>
-                            </tbody>
+                            ?>        
+                        </tbody>
                         </table>
                 </div>
             </div>
@@ -341,32 +340,80 @@ $username = $_SESSION["username"];
                     </table>
                 </div>
             </div>      
-
             <div class="category-content" id="Online-Orders">
-                <div class="container my-5">
-                    <h2>List of Orders</h2> 
-                        <br>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Order ID</th>
-                                    <th>Patient SSN</th>
-                                    <th>Patient Address</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    <tr>               
-                                        <td>$row["Order_ID"]</td>            
-                                        <td>$row["Patient_SSN"]</td>
-                                        <td>$row["Patient_Address"]</td>
-                                        <td>
-                                            <a class="btn btn-primary" href="#" role="button">Send</a>
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table>
-                </div>
-            </div>
+    <div class="container my-5">
+        <h2>List of Orders</h2> 
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Patient SSN</th>
+                    <th>Patient Name</th>
+                    <th>Drug Name</th>
+                    <th>Order Quantity</th>
+                    <th>Dosage</th>
+                    <th>Instructions</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                // Establish a connection to the database
+                require_once("../connect.php");
+
+                // SQL query to fetch order details
+                $sql = "
+                    SELECT 
+                        Order_ID, 
+                        Patient_SSN, 
+                        Patient_Name, 
+                        Drug_Name, 
+                        Order_Quantity, 
+                        Dosage, 
+                        Instructions
+                    FROM orders
+                ";
+
+                // Execute the query
+                $result = $conn->query($sql);
+
+                // Check for query errors
+                if ($result === false) {
+                    echo "<tr><td colspan='8'>Error executing query: " . htmlspecialchars($conn->error) . "</td></tr>";
+                } else {
+                    // Check if there are results
+                    if ($result->num_rows > 0) {
+                        // Fetch and display data
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row["Order_ID"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["Patient_SSN"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["Patient_Name"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["Drug_Name"]) . "</td>"; // Ensure Drug_Name is the correct column name
+                            echo "<td>" . htmlspecialchars($row["Order_Quantity"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["Dosage"]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row["Instructions"]) . "</td>";
+                            echo "<td>";
+                            echo "<a class='btn btn-primary' href='sendOrder.php?id=$row[Order_ID]' role='button'>Send</a>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='8'>No orders found.</td></tr>";
+                    }
+                    $result->free(); // Free result set
+                }
+
+                // Close the database connection
+                $conn->close();
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+            
         </div>
     </div>
     <!-- Prescription Modal -->
