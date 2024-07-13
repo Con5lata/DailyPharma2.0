@@ -9,6 +9,50 @@
     <link rel="stylesheet" href="../style3.css">
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <style>
+        
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+    
+    .add-to-cart-btn {
+        background-color: #088178;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        
+        transition: background-color 0.3s ease;
+    }
+    
+    .add-to-cart-btn:hover {
+        background-color: whitesmoke;
+        color: #088178;
+        border: #088178;
+        border: 1px solid;
+
+    }
+    
+    .view-product-btn {
+        background-color: #0f100f;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        
+        transition: background-color 0.3s ease;
+    }
+    
+    .view-product-btn:hover {
+        background-color: white;
+        color: #0f100f;
+        border: 1px solid;
+        border-color: #088178;
+    }
+    </style>
     <title>DailyPharma - Patient Orders</title>
 </head>
 <body class="PatientView">
@@ -45,7 +89,7 @@
 
     <section id="product1" class="section-p1">
         <div class="pro-container">
-            <div class="pro"  onclick="window.location.href='singleproduct.html'">
+            <div class="pro">
                 <img src="../images/f2.webp" alt="">
                 <div class="des">
                     <h5>CeraVe Foaming Cleanser</h5>
@@ -58,9 +102,13 @@
                     </div>
                     <h4>Ksh2500</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary" onclick="addToCart(1, 'CeraVe Foaming Cleanser', 2500)">Add to Cart</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
+
             </div>
-            <div class="pro"  onclick="window.location.href='singleproduct2.html'">
+            <div class="pro">
                 <img src="../images/f1.png" alt="">
                 <div class="des">
                     <h5>12 Vitamin C Tablets</h5>
@@ -73,7 +121,10 @@
                     </div>
                     <h4>Ksh508</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(2, '12 Vitamin C Tablets', 508)">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct2.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f3.webp" alt="">
@@ -88,7 +139,10 @@
                     </div>
                     <h4>Ksh588</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(3, 'Seven Seas Cod-Liver Oil', 588)">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f4.webp" alt="">
@@ -103,7 +157,10 @@
                     </div>
                     <h4>Ksh385</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(4, '10s Flu-Gone Capsules', 385)">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f5.webp" alt="">
@@ -118,7 +175,10 @@
                     </div>
                     <h4>Ksh923</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(5, '100s Panadol Capsules', 923)">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f6.webp" alt="">
@@ -133,7 +193,10 @@
                     </div>
                     <h4>Ksh255</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart(6, 'Gummy Vitamin Tablets', 302)">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f7.webp" alt="">
@@ -148,7 +211,10 @@
                     </div>
                     <h4>Ksh1,534</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f8.webp" alt="">
@@ -163,7 +229,10 @@
                     </div>
                     <h4>Ksh4,050</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f9.webp" alt="">
@@ -178,7 +247,10 @@
                     </div>
                     <h4>Ksh93</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f10.webp" alt="">
@@ -193,7 +265,10 @@
                     </div>
                     <h4>Ksh1,930</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f11.webp" alt="">
@@ -208,7 +283,10 @@
                     </div>
                     <h4>Ksh313</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f12.webp" alt="">
@@ -223,7 +301,10 @@
                     </div>
                     <h4>Ksh4,080</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f13.webp" alt="">
@@ -238,7 +319,10 @@
                     </div>
                     <h4>Ksh1,013</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f14.png" alt="">
@@ -252,7 +336,10 @@
                     </div>
                     <h4>Ksh600</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
             <div class="pro">
                 <img src="../images/f15.JPG" alt="">
@@ -267,15 +354,19 @@
                     </div>
                     <h4>Ksh1,306</h4>
                 </div>
-                <a href="#"><i class="fa fa-shopping-cart cart"></i></a>
+                <div class="actions">
+                    <button class="btn btn-primary add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+                    <button class="btn btn-primary view-product-btn" onclick="window.location.href='singleproduct.html'">View Product</button>
+                </div>
             </div>
+            
         </div>
     </section>
+
     <section id="pagination" class="section-p1">
         <a href="#">1</a>
         <a href="#">2</a>
         <a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-
     </section>
     
     <!--Footer-->
@@ -342,10 +433,35 @@
             <p>&copy; 2024 DailyPharma. All rights reserved.</p>
         </div>
     </section>
-
-
+    
     <script src="../script.js"></script>
     <script src="../script4.js"></script>
-    <script src="cart.js"></script>
+    <script>
+        // Function to add item to the cart
+        function addToCart(productId, productName, productPrice) {
+            // Assuming you have a function or API call here to add the item to the cart
+            // For now, we will just log the product details
+            console.log("Product ID:", productId);
+            console.log("Product Name:", productName);
+            console.log("Product Price:", productPrice);
+
+            // Show a prompt that the item has been added to the cart
+            alert(productName + " has been added to your cart!");
+        }
+
+        // Attach event listeners to add-to-cart buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            var addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var productElement = this.closest('.pro');
+                    var productName = productElement.querySelector('h5').innerText;
+                    var productPrice = productElement.querySelector('h4').innerText.replace('Ksh', '');
+                    addToCart(1, productName, productPrice); // Product ID is set to 1 for demonstration
+                });
+            });
+        });
+    </script>
+   
 </body>
 </html>

@@ -444,19 +444,22 @@ nav a:not(:last-child):hover::after {
   width: 70px;
   padding: 10px 5px 10px 15px;
 }
-
-.btn-danger {
-  background-color: rgb(244, 244, 244);
-  border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 0.25rem;
-  text-align: center;
+.total-section {
+  background-color: #f8f9fa; /* Light grey background */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(205, 226, 226, 0.1);
+  text-align: right; /* Center-align the content */
+  margin-top: 20px;
 }
 
-.btn-danger:hover {
-  background-color: #c4b6b6;
+.total-section h4 {
+  margin: 0; /* Remove default margin */  
  
 }
+
+.total-section #cart-total {
+  color: #088178; /* Green color for the total amount */
+  
+}
+

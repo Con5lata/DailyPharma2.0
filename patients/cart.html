@@ -91,7 +91,11 @@
             </tbody>
         </table>
         <div class="total-section">
-            <h3>Total: <span id="cart-total">Ksh3008</span></h3>
+            <h4>Total: <span id="cart-total">Ksh3008</span></h4>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-success" onclick="proceedToCheckout()">Checkout</button>
+
         </div>
     </section>
     <!--Footer-->
@@ -158,6 +162,13 @@
             <p>&copy; 2024 DailyPharma. All rights reserved.</p>
         </div>
     </section>
+    <script>
+        function proceedToCheckout() {
+            alert("Proceeding to checkout...");
+            window.location.href = 'checkout.html';
+        }
+    </script>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
