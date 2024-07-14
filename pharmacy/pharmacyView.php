@@ -26,6 +26,9 @@ $username = $_SESSION["username"];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../style.css">
+    <style>.sidebar{padding-left: 30px;}
+
+    </style>
     <title> DailyPharma - Pharmacy Home</title>
 </head>
 <body class="PharmacyView">
@@ -71,11 +74,15 @@ $username = $_SESSION["username"];
         </div>
         <div class="content">
             <div class="image-slide">
-                <div class="image-desc active">
-                    <h2>Manage your Drugs</h2>
-                    <p> Upload and manage the drugs you sell to patients.</p>
-                </div>
                 
+                <div class="image-desc">
+                    <h2>Respond to Inquiries</h2>
+                    <p>We promptly respond to all questions that our patients might have.</p>
+                </div>
+                <div class="image-desc">
+                    <h2>Manage uploaded Prescriptions</h2>
+                    <p>Validate the uploaded prescriptions and supply medication to patients.</p>
+                </div>
                 <div class="image-desc">
                     <h2>Hand Out Doctor-Prescriptions</h2>
                     <p>Give the drugs prescribed by doctors to patients.</p>
@@ -262,7 +269,7 @@ $username = $_SESSION["username"];
                             <tr>
                                 <th>Document ID</th>
                                 <th>Patient Name</th>
-                                <th>Doctor Name</th>
+                                <th>Patient SSN</th>
                                 <th>Document Type</th>
                                 <th>Upload Date</th>
                                  <th>Actions</th>
