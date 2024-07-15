@@ -196,12 +196,20 @@ $username = $_SESSION["username"];
                     </table>
                 </div>
             </div>
+            
 
             <div class="category-content" id="Prescribe-Drugs">
+                    <form action="search_prescription.php" method="get">
+                        <div class="search-container">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search by patient name" aria-label="Search" name="search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    </form>
             <div class="card">
             <div class="card-header">
                 Prescription Form
             </div>
+            
             <div class="card-body">
                 <form action="submit_prescription.php" method="post">
                     <div class="row mb-3">
