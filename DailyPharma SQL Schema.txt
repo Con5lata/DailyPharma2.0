@@ -1,0 +1,153 @@
+--151097 Barasa Conslata Nanzala & 151344 Mbindyo Ryan Kyalo -- DailyPharma Database Schema
+
+-- Create the database
+CREATE DATABASE dailypharma;
+
+-- Use the database
+USE dailypharma;
+
+-- Create the Patients table
+CREATE TABLE Patients (
+    Patient_SSN CHAR(11) PRIMARY KEY,
+    Patient_Name VARCHAR(100) NOT NULL,
+    Patient_Email VARCHAR(100) UNIQUE NOT NULL,
+    Patient_Phone VARCHAR(15) UNIQUE NOT NULL,
+    Patient_Address VARCHAR(255),
+    Password VARCHAR(255) NOT NULL,
+    Patient_DOB DATE NOT NULL,
+    Patient_Age INT GENERATED ALWAYS AS (YEAR(CURDATE()) - YEAR(Patient_DOB)),
+    Status ENUM('Active', 'Inactive') DEFAULT 'Active'
+);
+
+-- Create the Inquiry table
+CREATE TABLE Inquiry (
+    Inquiry_No INT AUTO_INCREMENT PRIMARY KEY,
+    Patient_SSN CHAR(11),
+    Inquiry TEXT NOT NULL,
+    FOREIGN KEY (Patient_SSN) REFERENCES Patients(Patient_SSN)
+);
+
+-- Create the Pharmacists table
+CREATE TABLE Pharmacists (
+    Pharmacist_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Pharmacist_Name VARCHAR(100) NOT NULL,
+    Pharmacist_Email VARCHAR(100) UNIQUE NOT NULL,
+    Pharmacist_Phone VARCHAR(15) UNIQUE NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Status ENUM('Active', 'Inactive') DEFAULT 'Active'
+);
+
+-- Create the Orders table
+CREATE TABLE Orders (
+    Order_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Patient_SSN CHAR(11),
+    Patient_Name VARCHAR(100) NOT NULL,
+    Drug_Name VARCHAR(100) NOT NULL,
+    Order_Quantity INT NOT NULL,
+    Dosage VARCHAR(100),
+    Instructions TEXT,
+    Dispensed_By INT,
+    FOREIGN KEY (Patient_SSN) REFERENCES Patients(Patient_SSN),
+    FOREIGN KEY (Dispensed_By) REFERENCES Pharmacists(Pharmacist_ID)
+);
+
+-- Create the Drugs table with Requires_Prescription as ENUM('Y', 'N')
+CREATE TABLE Drugs (
+    Drug_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Drug_Name VARCHAR(100) NOT NULL,
+    Drug_Description TEXT,
+    Instructions TEXT,
+    Dosage VARCHAR(100),
+    Requires_Prescription ENUM('Y', 'N') DEFAULT 'N',
+    Manufacturing_Date DATE NOT NULL,
+    Expiry_Date DATE NOT NULL
+);
+
+-- Create the Doctors table
+CREATE TABLE Doctors (
+    Doctor_SSN CHAR(11) PRIMARY KEY,
+    Doctor_Name VARCHAR(100) NOT NULL,
+    Doctor_Phone VARCHAR(15) UNIQUE NOT NULL,
+    Doctor_Email VARCHAR(100) UNIQUE NOT NULL,
+    Doctor_Speciality VARCHAR(100),
+    Doctor_Experience INT NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Status ENUM('Active', 'Inactive') DEFAULT 'Active'
+);
+
+-- Create the Prescriptions table
+CREATE TABLE Prescriptions (
+    Prescription_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Patient_SSN CHAR(11),
+    Doctor_SSN CHAR(11),
+    Drug_ID INT,
+    Prescription_Amt VARCHAR(100) NOT NULL,
+    Prescription_Instructions TEXT,
+    Prescribed ENUM('Y', 'N') DEFAULT 'N',
+    FOREIGN KEY (Patient_SSN) REFERENCES Patients(Patient_SSN),
+    FOREIGN KEY (Doctor_SSN) REFERENCES Doctors(Doctor_SSN),
+    FOREIGN KEY (Drug_ID) REFERENCES Drugs(Drug_ID)
+);
+
+-- Create the Admin table
+CREATE TABLE Admin (
+    Admin_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Admin_Name VARCHAR(100) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Status ENUM('Active', 'Inactive') DEFAULT 'Active'
+);
+
+-- Insert data into Patients table
+INSERT INTO Patients (Patient_SSN, Patient_Name, Patient_Email, Patient_Phone, Patient_Address, Password, Patient_DOB, Status)
+VALUES
+('123-45-6789', 'John Doe', 'john.doe@example.com', '123-456-7890', '123 Main St, Springfield', 'password123', '1980-05-15', 'Active'),
+('987-65-4321', 'Jane Smith', 'jane.smith@example.com', '987-654-3210', '456 Elm St, Springfield', 'password456', '1992-07-22', 'Active'),
+('111-22-3333', 'Alice Johnson', 'alice.johnson@example.com', '111-222-3333', '789 Oak St, Springfield', 'password789', '1985-03-10', 'Inactive');
+
+-- Insert data into Inquiry table
+INSERT INTO Inquiry (Patient_SSN, Inquiry)
+VALUES
+('123-45-6789', 'What are the side effects of Drug A?'),
+('987-65-4321', 'Is Drug B available over the counter?'),
+('111-22-3333', 'Can I get a refill for my prescription?');
+
+-- Insert data into Pharmacists table
+INSERT INTO Pharmacists (Pharmacist_Name, Pharmacist_Email, Pharmacist_Phone, Password, Status)
+VALUES
+('Mike Brown', 'mike.brown@example.com', '222-333-4444', 'pharma123', 'Active'),
+('Sara Green', 'sara.green@example.com', '333-444-5555', 'pharma456', 'Active'),
+('Tom White', 'tom.white@example.com', '444-555-6666', 'pharma789', 'Inactive');
+
+-- Insert data into Orders table
+INSERT INTO Orders (Patient_SSN, Patient_Name, Drug_Name, Order_Quantity, Dosage, Instructions, Dispensed_By)
+VALUES
+('123-45-6789', 'John Doe', 'Drug A', 1, '50mg', 'Take once daily', 1),
+('987-65-4321', 'Jane Smith', 'Drug B', 2, '10mg', 'Take twice daily', 2),
+('111-22-3333', 'Alice Johnson', 'Drug C', 1, '20mg', 'Take once every morning', 3);
+
+-- Insert data into Drugs table
+INSERT INTO Drugs (Drug_Name, Drug_Description, Instructions, Dosage, Requires_Prescription, Manufacturing_Date, Expiry_Date)
+VALUES
+('Drug A', 'Description for Drug A', 'Take once daily', '50mg', 'Y', '2023-01-01', '2025-01-01'),
+('Drug B', 'Description for Drug B', 'Take twice daily', '10mg', 'N', '2023-02-01', '2025-02-01'),
+('Drug C', 'Description for Drug C', 'Take once every morning', '20mg', 'Y', '2023-03-01', '2025-03-01');
+
+-- Insert data into Doctors table
+INSERT INTO Doctors (Doctor_SSN, Doctor_Name, Doctor_Phone, Doctor_Email, Doctor_Speciality, Doctor_Experience, Password, Status)
+VALUES
+('222-33-4444', 'Dr. Emily Brown', '555-666-7777', 'emily.brown@example.com', 'Cardiology', 10, 'docpass123', 'Active'),
+('333-44-5555', 'Dr. David Smith', '666-777-8888', 'david.smith@example.com', 'Neurology', 15, 'docpass456', 'Active'),
+('444-55-6666', 'Dr. Linda Green', '777-888-9999', 'linda.green@example.com', 'Pediatrics', 8, 'docpass789', 'Inactive');
+
+-- Insert data into Prescriptions table
+INSERT INTO Prescriptions (Patient_SSN, Doctor_SSN, Drug_ID, Prescription_Amt, Prescription_Instructions, Prescribed)
+VALUES
+('123-45-6789', '222-33-4444', 1, '30 tablets', 'Take once daily', 'Y'),
+('987-65-4321', '333-44-5555', 2, '60 tablets', 'Take twice daily', 'Y'),
+('111-22-3333', '444-55-6666', 3, '90 tablets', 'Take once every morning', 'N');
+
+-- Insert data into Admin table
+INSERT INTO Admin (Admin_Name, Password, Status)
+VALUES
+('Admin One', 'adminpass123', 'Active'),
+('Admin Two', 'adminpass456', 'Active');
